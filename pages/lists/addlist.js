@@ -7,7 +7,6 @@ export default function NewList() {
     const descriptionInputRef = useRef();
     async function handleSubmit(event) {
         event.preventDefault();
-
         const title = titleInputRef.current.value;
         const description = descriptionInputRef.current.value;
         const {data} = await axios.post('/api/lists', {
