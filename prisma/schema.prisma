@@ -8,10 +8,21 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "foreignKeys"
 }
 
 model List {
   id Int @id @default(autoincrement())
   title String
+  description String
+  books Book[]
+}
+
+model Book {
+  id Int @id @default(autoincrement())
+  list List @relation(fields: [listId], references: [id])
+  listId Int
+  title String
+  author String 
   description String
 }

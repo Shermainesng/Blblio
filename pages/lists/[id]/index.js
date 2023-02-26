@@ -1,15 +1,11 @@
 import axios from 'axios'
+import Router, { useRouter } from 'next/router';
+import Link from 'next/link';
+import { prisma } from '@/server/db/client';
+import BookList from '@/components/books/book-list';
 
-export default function IndivList({list}){
+export default function IndivList({list, initialBooks}){
 
-    async function handleEdit() {
-        const {data} = await axios.put('/api/lists', {
-            id:list.id,
-            title: "test1 edit",
-            description:"desc edit"
-        })
-        console.log(list.id);
-    }
 
     async function handleDelete() {
         // listId = parseInt(listId);
@@ -24,24 +20,33 @@ export default function IndivList({list}){
     return(
         <>
             <h2>{list.title}</h2>
-
-            <button onClick={()=>handleEdit()}>Edit this list</button>
+        
+            <Link href={`/lists/${list.id}/editlist`}>Edit this List</Link>
             <button onClick={()=>handleDelete()}>Delete this list</button>
+            <h1>All your books:</h1>
+                <BookList items={initialBooks}/>
         </>
     )
 
 }
 export async function getServerSideProps({params}){
-    const ListId=parseInt(params.listId);
+    const listId = parseInt(params.id)
     const list = await prisma.List.findUnique({
         where: {
-          id:ListId
+          id: listId
         },
       })
+
+      const books = await prisma.book.findMany({
+        where: {
+            listid: parseInt(params.id)
+        },
+    })
 
     return{
         props:{
             list,
+            initialBooks: books
 
         }
     }

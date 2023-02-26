@@ -6,8 +6,8 @@ import { prisma } from "@/server/db/client"
 
 export default async function handler(req, res) {
     const {method} = req
-    const {title, description, id} = req.body
-   
+    const {id, title, description} = req.body
+   console.log("This is iD" + id);
     switch (method) {
         case 'POST': 
             const list = await prisma.list.create({
