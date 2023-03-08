@@ -1,9 +1,9 @@
+
 import BookItem from "./book-item";
 
 function BookList(props) {
     const { items } = props;
-    // const authors = items[0].volumeInfo.authors.join()
-    console.log("image url " + items[0].volumeInfo.imageLinks.thumbnail)
+  
     return (
       <ul>
         {items.map(book => (
@@ -13,6 +13,12 @@ function BookList(props) {
           description={book.volumeInfo.description} 
           author={book.volumeInfo.authors} 
           category={book.volumeInfo.categories} 
+          
+            imageUrl={typeof book.volumeInfo.imageLinks== 'undefined' ? 
+            `http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api`
+            :
+            book.volumeInfo.imageLinks.thumbnail}
+          
           publishedDate={book.volumeInfo.publishedDate}
           publisher={book.volumeInfo.publisher}
           />

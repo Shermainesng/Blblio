@@ -22,8 +22,9 @@ function BookItem(props) {
             <p>Author:{author}</p>
             <p>Description: {description}</p>
             <p>Category: {category}</p>
-            <Image src="https://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="pic of book" width={500} height={500}/>
-            
+            {imageUrl !=null ?
+                <Image src={imageUrl} alt="pic of book" width={500} height={500}/>: <h1>no image</h1>
+            }
             {props.isDelete ? 
                 <button onClick={()=>handleDelete()}>Delete this book</button>: <p></p>
             }

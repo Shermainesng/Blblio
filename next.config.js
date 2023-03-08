@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify:true,
   images: {
     domains:[
-      "https://books.google.com"
+      "books.google.com"
     ]
   }
 }
