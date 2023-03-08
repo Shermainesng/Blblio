@@ -3,9 +3,11 @@ import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import { prisma } from '@/server/db/client';
 import BookList from '@/components/books/book-list';
+import { useRef,useState } from 'react'
 
 export default function IndivList({list, initialBooks}){
-
+    const [isDelete] = useState(false);
+    console.log(initialBooks);
 
     async function handleDelete() {
         // listId = parseInt(listId);
@@ -23,8 +25,8 @@ export default function IndivList({list, initialBooks}){
         
             <Link href={`/lists/${list.id}/editlist`}>Edit this List</Link>
             <button onClick={()=>handleDelete()}>Delete this list</button>
-            <h1>All your books:</h1>
-                <BookList items={initialBooks}/>
+            <h1>Books in your List:</h1>
+                <BookList items={initialBooks} isDelete={isDelete}/>
         </>
     )
 
@@ -39,7 +41,7 @@ export async function getServerSideProps({params}){
 
       const books = await prisma.book.findMany({
         where: {
-            listid: parseInt(params.id)
+            listId: parseInt(params.id)
         },
     })
 

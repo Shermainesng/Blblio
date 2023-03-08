@@ -1,23 +1,14 @@
 import {prisma} from '../../server/db/client'
 import Link from 'next/link'
+import ListsOfLists from '@/components/lists/lists-list';
 
 export default function AllLists({initialLists}) {
     const lists = [];
 
     return (
         <div>
-            <ul>
-                {initialLists.map(list => (
-                    <li key={list.id}>
-                        {list.title}, {list.description}
-                        <Link href={`/lists/${list.id}`}>
-                            View List
-                        </Link>
-                    </li>
-                ))}
-               
-            
-            </ul>
+            <h1>Your List:</h1>
+            <ListsOfLists initialLists={initialLists}/>
         </div>
     )
 }

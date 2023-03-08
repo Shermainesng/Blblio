@@ -1,11 +1,12 @@
 import BookItem from "./book-item";
+
 function BookList(props) {
-    const { items } = props;
+    const { items, isDelete } = props;
   
     return (
       <ul>
         {items.map(book => (
-          <BookItem key={book.id} id={book.id} title={book.title} />
+          <BookItem key={book.id} id={book.id} title={book.title} author={book.author} description={book.description} isDelete={isDelete}/>
         ))}
       </ul>
     );

@@ -1,9 +1,13 @@
+import BookList from '@/components/books/book-list';
 import axios from 'axios'
-import Router from 'next/router';
+import {useRouter} from 'next/router';
 import { useRef,useState } from 'react'
 
-export default function EditList({list}) {
+export default function EditList({list, initialBooks}) {
+    const router = useRouter()
+    const [route, setRoute] = useState()
 
+    const [isDelete] = useState(true);
     const titleInputRef = useRef();
     const descriptionInputRef = useRef();
 
@@ -16,7 +20,7 @@ export default function EditList({list}) {
             title: editTitle,
             description: editDescription
         })
-        console.log(list.id);
+        router.push("/lists/" + list.id)
     }
     
 
@@ -33,8 +37,10 @@ export default function EditList({list}) {
                     <label htmlFor='description'>Describe your list:</label>
                     <input type='text' id='description' defaultValue={list.description} ref={descriptionInputRef}/>
                 </div>
-                <button>Create List</button>
+                <button>Save Changes</button>
             </form>
+            <h1>All your books:</h1>
+                <BookList items={initialBooks} isDelete={isDelete}/>
         </div>
     )
 }
@@ -48,10 +54,16 @@ export async function getServerSideProps({params}){
         },
       })
 
+      const books = await prisma.book.findMany({
+        where: {
+            listId: parseInt(params.id)
+        },
+      })
+
     return{
         props:{
             list,
-
+            initialBooks: books
         }
     }
 } 

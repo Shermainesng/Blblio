@@ -3,17 +3,21 @@ import { useRouter } from 'next/router'
 import { useRef,useState } from 'react'
 
 export default function NewList() {
+    const router = useRouter()
+
     const titleInputRef = useRef();
     const descriptionInputRef = useRef();
     async function handleSubmit(event) {
         event.preventDefault();
         const title = titleInputRef.current.value;
         const description = descriptionInputRef.current.value;
+        const userId = 1;
         const {data} = await axios.post('/api/lists', {
             title,
             description,
+            userId
         })
-        console.log(data)
+        router.push("/lists")
     }
 
     return (
