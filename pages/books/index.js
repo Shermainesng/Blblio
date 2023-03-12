@@ -9,7 +9,7 @@ export default function AllPublicBooks() {
     const {data, error} = useSWR('https://www.googleapis.com/books/v1/volumes?q=most+famous+books', fetcher)
     if (error) return <div>failed to load</div>
     if(!data) return <div>loading</div>
-    
+    console.log(data)
     
     return(
         <div>
