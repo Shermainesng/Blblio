@@ -32,15 +32,16 @@ export default function BookDetails({book, lists}) {
 
             <p>{book.volumeInfo.description}</p>
             <button onClick={()=>handleClick()}>Add book to a list</button>
-            {isShown ? <AddBookToList bookId={bookId} isShown={isShown} setIsShown={setIsShown} lists={lists}/>:null}
+            {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} lists={lists}/>:null}
         </div>
     )
 }
 
 export async function getServerSideProps(context) {
     const prisma = new PrismaClient();
+    var bookIdString = context.params.bookId;
 
-    var res = await fetch `https://www.googleapis.com/books/v1/volumes/SAFVv6aTpFMC`
+    var res = await fetch (`https://www.googleapis.com/books/v1/volumes/${bookIdString}`)
     const book = await res.json()
     const lists = await prisma.List.findMany();
     return {

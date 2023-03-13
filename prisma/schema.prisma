@@ -20,20 +20,28 @@ model List {
   id Int @id @default(autoincrement())
   title String
   description String
-  books Book[]
+  books BooksOnLists[]
   user User @relation(fields: [userId], references: [id])
   userId Int
 }
 
-model Book {
-  id Int @id @default(autoincrement())
+// model Book {
+//   id Int @id @default(autoincrement())
+//   lists BooksOnLists[]
+//   title String
+//   author String 
+//   publisher String
+//   publishedDate String
+//   category String
+//   imageUrl String
+//   description String
+// }
+
+model BooksOnLists {
+  bookId String
   list List @relation(fields: [listId], references: [id])
   listId Int
-  title String
-  author String 
-  publisher String
-  publishedDate String
-  category String
-  imageUrl String
-  description String
+  assignedAt DateTime @default(now())
+  
+  @@id([listId])
 }
