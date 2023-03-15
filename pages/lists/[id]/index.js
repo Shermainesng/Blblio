@@ -17,9 +17,9 @@ export default function IndivList({list, bookIds}){
 
     async function gettingBook(){
         var books = []
-        const bookIdString = bookIds[0].bookId;
         if (bookIds.length >= 0) {
             for (let i=0; i<bookIds.length; i++) {
+                var bookIdString = bookIds[i].bookId;
                 var book = await getDetailsForBook(bookIdString)
                 if (!book && !book.volumeInfo) {
                     return <div>loading</div>

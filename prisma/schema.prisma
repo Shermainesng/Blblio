@@ -38,10 +38,9 @@ model List {
 // }
 
 model BooksOnLists {
+  id Int @id @default(autoincrement())
   bookId String
-  list List @relation(fields: [listId], references: [id])
   listId Int
+  list List @relation(fields: [listId], references: [id])
   assignedAt DateTime @default(now())
-  
-  @@id([listId])
 }

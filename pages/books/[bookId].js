@@ -7,11 +7,13 @@ import axios from "axios";
 import Image from 'next/image';
 import {PrismaClient} from '@prisma/client';
 
-export default function BookDetails({book, lists}) {
+export default function BookDetails({book, lists, booksInAllLists}) {
     const [isShown, setIsShown] = useState(false);
 
     const router = useRouter();
     const bookId = router.query.bookId;
+
+    console.log(booksInAllLists)
 
     function handleClick(e) {
         setIsShown(true);
@@ -32,22 +34,23 @@ export default function BookDetails({book, lists}) {
 
             <p>{book.volumeInfo.description}</p>
             <button onClick={()=>handleClick()}>Add book to a list</button>
-            {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} lists={lists}/>:null}
+            {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} lists={lists} booksInAllLists={booksInAllLists}/>:null}
         </div>
     )
 }
 
 export async function getServerSideProps(context) {
-    const prisma = new PrismaClient();
     var bookIdString = context.params.bookId;
 
     var res = await fetch (`https://www.googleapis.com/books/v1/volumes/${bookIdString}`)
     const book = await res.json()
     const lists = await prisma.List.findMany();
+    const booksInAllLists = await prisma.booksOnLists.findMany();
     return {
         props: {
             book,
             lists,
+            booksInAllLists: JSON.parse(JSON.stringify(booksInAllLists)),
         }
     }
 }

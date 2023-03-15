@@ -1,9 +1,10 @@
-
-import {PrismaClient} from '@prisma/client';
 import axios from 'axios';
 
 export default function AddBookToList(props) {
-    
+
+    console.log(props.booksInAllLists)
+    console.log(props.book)
+
     function handleCancel() {
         {props.setIsShown(false)}
     }
@@ -11,14 +12,20 @@ export default function AddBookToList(props) {
     async function handleAddBookToList(listId, bookId) {
         if(!bookId) {
             return <div>loading</div>
-        } else {
+
+        } 
+    
+        const found = props.booksInAllLists.find(book => book.bookId ==  bookId && listId == listId);
+        if (typeof found == 'undefined') {
             const {data} = await axios.post('/api/booksonlist', {
                 listId: listId,
                 bookId: bookId
             })
+        } else {
+            alert("book is already in your list!")
         }
     }
-
+   
     return(
         <div>
             <h1>Which list do you want to add book {props.book.title} to?</h1>
@@ -33,4 +40,5 @@ export default function AddBookToList(props) {
         </div>
     )
 }
+
 
