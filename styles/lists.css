@@ -1,0 +1,15 @@
+.custom-banner {
+    height: 100vh;
+}
+
+#cover-img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+#cover > img {
+    float: left;
+    border: 2px solid black;
+    width: 45%;
+    margin: 1.66%;
+  }

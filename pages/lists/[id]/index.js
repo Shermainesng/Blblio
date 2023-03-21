@@ -6,18 +6,21 @@ import BookList from '@/components/books/book-list';
 import { useEffect, useRef,useState } from 'react'
 import {getDetailsForBook} from '../../api/books'
 
+
 export default function IndivList({list, bookIds}){
     var [finalbooks, setBooks] = useState([])
-    const [isDelete] = useState(false);
-    console.log("THIS IS BOOK id " + bookIds[0].bookId);
+    var [loading, setLoading] = useState(false)
+    const [isDelete] = useState(true);
 
     useEffect(() => {
         gettingBook();
     }, [])
-
+    
     async function gettingBook(){
+        
         var books = []
         if (bookIds.length >= 0) {
+            setLoading(true)
             for (let i=0; i<bookIds.length; i++) {
                 var bookIdString = bookIds[i].bookId;
                 var book = await getDetailsForBook(bookIdString)
@@ -25,7 +28,6 @@ export default function IndivList({list, bookIds}){
                     return <div>loading</div>
                 } else {
                     books.push(book)
-                    console.log(books)
                 }
             }
             setBooks(books);
@@ -44,12 +46,17 @@ export default function IndivList({list, bookIds}){
 
     return(
         <>
-            <h2>{list.title} ID: {list.id}</h2>
+            <h2>{list.title} LIST ID: {list.id}</h2>
         
             <Link href={`/lists/${list.id}/editlist`}>Edit this List</Link>
             <button onClick={()=>handleDelete()}>Delete this list</button>
-            <h1>Books in your List:</h1>
-                <BookList items={finalbooks} isDelete={isDelete}/>
+            <h1>Books in your List:{bookIds.length}</h1>
+                {bookIds.length == 0 && <div>List is empty!</div>}    
+               
+                {bookIds.length > 0 && finalbooks.length == 0 ?
+                    <div>Loading...</div>:
+                    <BookList items={finalbooks} isDelete={isDelete} listid = {list.id}/>}
+ 
         </>
     )
 

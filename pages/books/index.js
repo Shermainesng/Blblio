@@ -2,6 +2,7 @@ import BookListApi from "@/components/books/book-list-api";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useSWR from 'swr';
+import Navbar from "@/components/ui/Navbar";
 
 export default function AllPublicBooks() {
     // const [loadedBooks, setLoadedBooks] = useState(books.items)
@@ -13,8 +14,12 @@ export default function AllPublicBooks() {
     
     return(
         <div>
-            <h1>All Books Out there. Pick what you like</h1>
-            {data && <BookListApi items={data.items}/>}
+            <div>
+                <h1>All Books Out there. Pick what you like</h1>
+                {data && <BookListApi items={data.items}/>}
+            </div>
+        
+
         </div>
     )
 }

@@ -3,29 +3,26 @@ import { useState } from 'react';
 import Image from 'next/image';
 import AddBookToList from './add-book-to-list';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function BookItem(props) {
+    const router = useRouter()
     const {id, title, author, description, category, imageUrl, publishedDate, publisher} = props;
-    const [isDelete, setIsDelete] = useState();
 
     async function handleDelete() {
-        const {data} = await axios.delete('/api/books', {
+        const {data} = await axios.delete('/api/booksonlist', {
             data: {
-                id:id
+                listid:props.listid,
+                bookid:id
             }
         })
-        console.log(id);
+        router.reload()
     }
-
-    console.log(author)
     return (
         <div>
+
             <Link href={`/books/${id}`}>
-                <h1>id: {id}</h1>
                 <h1>Title: {title}</h1>
-                <p>Author:{author}</p>
-                <p>Description: {description}</p>
-                <p>Category: {category}</p>
                 {imageUrl !=null ?
                     <Image src={imageUrl} alt="pic of book" width={500} height={500}/>: <h1>no image</h1>
                 }

@@ -2,15 +2,17 @@ import { prisma } from "@/server/db/client"
 
 export default async function handler(req, res) {
     const {method} = req
-    const {bookId, listId} = req.body
+    const {bookId, listId, listid, bookid} = req.body
     switch (method) {
-        // case 'DELETE':
-        //     const deleteBook = await prisma.Book.delete({
-        //         where: {
-        //             id: id,
-        //         }
-        //     })
-        //     res.status(200).json(deleteBook);
+        case 'DELETE':
+            const deleteBook = await prisma.BooksOnLists.deleteMany({
+                where: {
+                    listId: listid,
+                    bookId: bookid
+                }
+            })
+            res.status(200).json(deleteBook);
+            break
         case 'POST': 
             const bookonlist = await prisma.BooksOnLists.create({
                 data: {

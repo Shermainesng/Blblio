@@ -1,26 +1,33 @@
 import axios from 'axios';
+import {useRouter} from 'next/router';
 
 export default function AddBookToList(props) {
+    const router = useRouter()
 
     console.log(props.booksInAllLists)
-    console.log(props.book)
 
     function handleCancel() {
         {props.setIsShown(false)}
     }
 
     async function handleAddBookToList(listId, bookId) {
+        console.log("this is list id " + listId)
+        console.log("this is book id " + bookId)
         if(!bookId) {
             return <div>loading</div>
 
         } 
     
-        const found = props.booksInAllLists.find(book => book.bookId ==  bookId && listId == listId);
+        var found = props.booksInAllLists.find(book => book.bookId  ==  bookId && book.listId == listId);
+        console.log(found);
         if (typeof found == 'undefined') {
             const {data} = await axios.post('/api/booksonlist', {
                 listId: listId,
                 bookId: bookId
             })
+
+            router.push(`/books`);
+
         } else {
             alert("book is already in your list!")
         }

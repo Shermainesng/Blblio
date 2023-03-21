@@ -1,0 +1,17 @@
+@import "./lists.css";
+
+
+
+.bg-orange {
+    background-color: #F3744A;
+}
+
+.big-header-fonts {
+    color:black;
+    font-size: 3rem;
+}
+
+.medium-header-fonts {
+    color: black;
+    font-size: 2rem;
+}
