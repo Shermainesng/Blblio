@@ -5,7 +5,7 @@ import { useRef,useState } from 'react'
 
 export default function EditList({list, initialBooks}) {
     const router = useRouter()
-    const [route, setRoute] = useState()
+    console.log(initialBooks)
 
     const [isDelete] = useState(true);
     const titleInputRef = useRef();
@@ -54,7 +54,7 @@ export async function getServerSideProps({params}){
         },
       })
 
-      const books = await prisma.book.findMany({
+      const books = await prisma.Book.findMany({
         where: {
             listId: parseInt(params.id)
         },

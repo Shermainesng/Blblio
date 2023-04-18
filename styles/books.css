@@ -1,0 +1,34 @@
+.grid-container-booklist {
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows:1fr;
+    grid-column-gap:30px;
+    grid-row-gap:30px;
+}
+
+.grid-item-booklist {
+  display:flex;
+  justify-content:space-between;
+  flex-direction: column;
+  align-items:center;
+
+}
+.book-title-table{
+    display:table;
+
+}
+.book-title {
+    display:table-cell;
+    overflow-wrap: nowrap;
+    inline-size: 80%;
+    height:4rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.image-center {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

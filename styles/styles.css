@@ -1,9 +1,22 @@
 @import "./lists.css";
+@import "./books.css";
 
 
 
 .bg-orange {
     background-color: #F3744A;
+}
+
+.bg-pink {
+    background-color: #CCA59A;
+}
+
+.bg-yellow {
+    background-color:#FCE374;
+}
+
+.bg-green {
+    background-color: #6FAB9F;
 }
 
 .big-header-fonts {
@@ -14,4 +27,13 @@
 .medium-header-fonts {
     color: black;
     font-size: 2rem;
+}
+
+.small-header-fonts {
+    color: black;
+    font-size:1.5rem;
+}
+
+.para-fonts {
+    color:black;
 }

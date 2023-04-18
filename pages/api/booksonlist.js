@@ -2,13 +2,13 @@ import { prisma } from "@/server/db/client"
 
 export default async function handler(req, res) {
     const {method} = req
-    const {bookId, listId, listid, bookid} = req.body
+    const {bookId, listId} = req.body
     switch (method) {
         case 'DELETE':
             const deleteBook = await prisma.BooksOnLists.deleteMany({
                 where: {
-                    listId: listid,
-                    bookId: bookid
+                    listId: listId,
+                    bookId: bookId
                 }
             })
             res.status(200).json(deleteBook);
@@ -23,7 +23,6 @@ export default async function handler(req, res) {
             res.status(201).json(bookonlist)
             console.log("added to table")
             break
-
         
     }
 }

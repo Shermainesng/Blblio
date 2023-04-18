@@ -1,26 +1,36 @@
 import Image from 'next/image';
 import BookItem from "./book-item";
 import Link from 'next/link';
+import noimg from '/public/no-img.png';
 
 function BookList(props) {
     const { items } = props;
   
     return (
       <div>
-        <h1>Browse Books</h1>
-        <ul>
-          {items.map(book => (
-            <Link href={`/books/${book.id}`} key={book.id}>
-                <p>{book.volumeInfo.title}</p>
-                {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
-                <Image src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={300} height={300}/>:
-                <Image src={`http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api`} alt="pic of book" width={300} height={300}/>
-              }
-
-            </Link>
-          ))}
+          <div className = "container">
+            <div className="row justify-content-md-center">
+              {items.map(book => (
           
-        </ul>
+                  <Link className='col-12 col-sm-12 col-md-6 col-lg-4' key={book.id} href={`/books/${book.id}`}>
+                      <div className="book-title-table d-flex flex-column align-items-center pb-3">
+                        {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
+                        <Image src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={250} height={300}/>:
+                        <Image src={noimg} alt="pic of book" width={250} height={300}/>
+                      }
+                      <p className="book-title pt-2">
+                          {book.volumeInfo.title}
+                          </p>
+                        
+                      </div>
+                  </Link>
+
+              ))}
+
+            </div>
+        
+         
+          </div>
       </div>
     );
   }

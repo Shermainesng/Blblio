@@ -4,27 +4,36 @@ import Image from 'next/image';
 import AddBookToList from './add-book-to-list';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import {noimg} from '/public/no-img.png';
 
 function BookItem(props) {
     const router = useRouter()
-    const {id, title, author, description, category, imageUrl, publishedDate, publisher} = props;
 
     async function handleDelete() {
-        const {data} = await axios.delete('/api/booksonlist', {
-            data: {
-                listid:props.listid,
-                bookid:id
-            }
-        })
+        if(props.bookId) {
+            const {data} = await axios.delete('/api/booksonlist', {
+                data: {
+                    listId:props.listId,
+                    bookId:props.bookId
+                }
+            })
+            const {deleteBook} = await axios.delete('/api/books', {
+                data: {
+                    listId: props.listid, 
+                    bookId: props.bookId
+                }
+            })
+
+        }
         router.reload()
     }
     return (
         <div>
 
-            <Link href={`/books/${id}`}>
-                <h1>Title: {title}</h1>
-                {imageUrl !=null ?
-                    <Image src={imageUrl} alt="pic of book" width={500} height={500}/>: <h1>no image</h1>
+            <Link href={`/books/${props.bookId}`}>
+                <h1>Title: {props.title}</h1>
+                {props.imageUrl !=null ?
+                    <Image src={props.imageUrl} alt="pic of book" width={500} height={500}/>: <Image src={noimg} alt="pic of book" width={500} height={500}/>
                 }
             </Link>
             

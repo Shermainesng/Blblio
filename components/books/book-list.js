@@ -11,11 +11,8 @@ function BookList(props) {
       
         <ul>
           {items.map(book => (
-            <BookItem key={book.id} id={book.id} title={book.volumeInfo.title} author={book.volumeInfo.authors} description={book.volumeInfo.description} listid = {listid} isDelete={isDelete}
-                imageUrl = {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
-                book.volumeInfo.imageLinks.thumbnail:
-              `http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api`
-              }
+            <BookItem key={book.id} bookId={book.bookId} title={book.title} author={book.author} description={book.description} listId = {book.listId} isDelete={isDelete}
+                imageUrl = {book.imageUrl} 
               />
           ))}
       </ul>

@@ -25,17 +25,18 @@ model List {
   userId Int
 }
 
-// model Book {
-//   id Int @id @default(autoincrement())
-//   lists BooksOnLists[]
-//   title String
-//   author String 
-//   publisher String
-//   publishedDate String
-//   category String
-//   imageUrl String
-//   description String
-// }
+model Book {
+  id Int @id @default(autoincrement())
+  bookId String
+  listId Int
+  title String
+  author String 
+  publisher String
+  publishedDate String
+  category String
+  imageUrl String
+  description String
+}
 
 model BooksOnLists {
   id Int @id @default(autoincrement())

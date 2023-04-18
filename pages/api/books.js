@@ -1,23 +1,33 @@
-import useSWR from 'swr';
-
-export async function getDetailsForBook(bookIdString) {
-
-
-    var res = await fetch (`https://www.googleapis.com/books/v1/volumes/${bookIdString}`)
-    const book = await res.json()
-    console.log("this is book title: " + book.volumeInfo.title)
-    if(!book) return <div>loading</div>
-    return book;
-
-}
-
-export async function findBooksForList(listId) {
-    
-    var booksInList = await prisma.booksInList.findMany({
-        where: {
-            listId: listId,
+import { prisma } from "@/server/db/client"
+export default async function handler(req, res) {
+    const {method} = req
+    const {bookId, listId, title, author, publisher, publishedDate, category, imageUrl, description} = req.body
+    switch (method) {
+        case 'POST': 
+            const book = await prisma.Book.create({
+                data: {
+                    bookId, 
+                    listId, 
+                    title, 
+                    author, 
+                    publisher, 
+                    publishedDate, 
+                    category,
+                    imageUrl,
+                    description
+                },
+            })
+            res.status(201).json(book)
+            console.log("added to book table")
+            break
+        case 'DELETE':
+            const deleteBook = await prisma.Book.deleteMany({
+                where: {
+                    listId: listId,
+                    bookId: bookId
+                }
+            })
+            res.status(200).json(deleteBook);
+            break
         }
-    });
-    return booksInList;
-}
-    
+    }

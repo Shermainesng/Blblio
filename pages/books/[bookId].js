@@ -22,13 +22,16 @@ export default function BookDetails({book, lists, booksInAllLists}) {
     if(!book) return <div>loading</div>
     // console.log(book)
     return (
-        <div>
-            <h1>Book {bookId}</h1>
-            <h1>{book.volumeInfo.title}</h1>
-            <p>{book.volumeInfo.publishedDate}</p>
-            <p>Written by: {book.volumeInfo.authors}</p>
+        <div className='bg-green'>
+            
+            <h1 className='big-header-fonts text-center'>{book.volumeInfo.title}</h1>
+            <div className='small-header-fonts text-center'>
+                <p>{book.volumeInfo.publishedDate.slice(0,4)}</p>
+                <p>Written by: {book.volumeInfo.authors}</p>
+
+            </div>
             {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
-                <Image src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={300} height={300}/>:
+                <Image className='image-center' src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={300} height={330}/>:
                 <Image src={`http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api`} alt="pic of book" width={300} height={300}/>
               }
 
@@ -40,6 +43,7 @@ export default function BookDetails({book, lists, booksInAllLists}) {
 }
 
 export async function getServerSideProps(context) {
+    const prisma = new PrismaClient();
     var bookIdString = context.params.bookId;
 
     var res = await fetch (`https://www.googleapis.com/books/v1/volumes/${bookIdString}`)
