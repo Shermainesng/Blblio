@@ -1,10 +1,15 @@
 import axios from 'axios';
 import {useRouter} from 'next/router';
+import ListsOfLists from '../lists/lists-list';
+import { useState } from 'react';
 
 export default function AddBookToList(props) {
     const router = useRouter()
+    const [canAddToList, setCanAddToList] = useState(true);
 
-    console.log(props.book)
+
+    console.log("HI " + props.books)
+  
 
     function handleCancel() {
         {props.setIsShown(false)}
@@ -34,7 +39,7 @@ export default function AddBookToList(props) {
                 publishedDate: props.book.volumeInfo.publishedDate,
                 category: props.book.volumeInfo.categories ? props.book.volumeInfo.categories[0] : "fake category",
                 imageUrl: props.book.volumeInfo.imageLinks.thumbnail,
-                description: props.book.volumeInfo.description ? props.book.volumeInfo.description: "this is a"
+                description: props.book.volumeInfo.description ? props.book.volumeInfo.description: "this is"
             })
             router.push(`/books`);
 
@@ -44,16 +49,21 @@ export default function AddBookToList(props) {
     }
    
     return(
-        <div>
-            <h1>Which list do you want to add book {props.book.title} to?</h1>
-                {props.lists.map(list => (
+        <div className='bg-green'>
+            <h1  className='medium-header-fonts'>which list do you want to add {props.book.volumeInfo.title} to?</h1>
+           
+            <div className='d-flex flex-column'>
+                <h2 className='medium-header-fonts'>YOUR LISTS:</h2>
+                {/* {props.lists.map(list => (
                     <div key={list.id}>
                         <button onClick={()=>handleAddBookToList(list.id, props.book.id)}>{list.title}</button>
                     </div>
 
-                ))}
-    
-                <button onClick={()=>handleCancel()}>Cancel</button>
+                ))} */}
+                <ListsOfLists initialLists={props.lists} canAddToList={canAddToList} books={props.books} book={props.book}/>
+                <button className="btn btn-yellow" onClick={()=>handleCancel()}>Cancel</button> 
+            </div>
+
         </div>
     )
 }

@@ -12,6 +12,7 @@ export default function IndivList({list, books}){
     var [loading, setLoading] = useState(false)
     const [isDelete] = useState(true);
 
+
     async function handleDelete() {
         const {data} = await axios.delete('/api/lists', {
             data: {
@@ -22,14 +23,20 @@ export default function IndivList({list, books}){
     }
 
     return(
-        <>
-            <h2>{list.title} LIST ID: {list.id}</h2>
-        
-            <Link href={`/lists/${list.id}/editlist`}>Edit this List</Link>
-            <button onClick={()=>handleDelete()}>Delete this list</button>
-            <BookList items={books} isDelete={!isDelete}/>
+        <div className='bg-pink container-fluid'>
+            <div className='content-box mx-auto pt-3'>
+                <h1 className='big-header-fonts'>{list.title}</h1>
+                <p className='small-header-fonts'>{list.description}</p>
+                
+                <Link href={`/lists/${list.id}/editlist`}>
+                    <button className='btn btn-yellow'>Edit this list</button>
+                </Link>
+                    
+                <button className='btn btn-yellow' onClick={()=>handleDelete()}>Delete this list</button>
+                <BookList items={books} isDelete={!isDelete}/>
+            </div>
  
-        </>
+        </div>
     )
 
 }
@@ -41,7 +48,7 @@ export async function getServerSideProps({params}){
           id: listId
         },
       })
-
+      console.log('title here ' + list.title)
       const books = await prisma.Book.findMany({
         where: {
             listId: parseInt(params.id)

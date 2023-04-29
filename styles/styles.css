@@ -19,6 +19,9 @@
     background-color: #6FAB9F;
 }
 
+.content-box {
+    width:80%;
+}
 .big-header-fonts {
     color:black;
     font-size: 3rem;
@@ -26,7 +29,7 @@
 
 .medium-header-fonts {
     color: black;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .small-header-fonts {
@@ -36,4 +39,18 @@
 
 .para-fonts {
     color:black;
+}
+
+.btn-yellow{
+    background-color: #FDE374;
+}
+
+.btn-yellow:hover {
+    background-color: #CCA59A;
+}
+
+.h-line {
+    border-bottom: 1px solid black;
+    
+    margin: auto;
 }

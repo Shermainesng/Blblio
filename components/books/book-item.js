@@ -28,7 +28,7 @@ function BookItem(props) {
         router.reload()
     }
     return (
-        <div>
+        <div className='book-title-table d-flex flex-column align-items-center pb-3'>
 
             <Link href={`/books/${props.bookId}`}>
                 <h1>Title: {props.title}</h1>

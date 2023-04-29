@@ -9,11 +9,17 @@ export default function AllLists({initialLists, books}) {
     return (
       <>
         <div className='container-fluid bg-orange custom-banner'>
-          <h1 className='big-header-fonts'>BROWSE LIST</h1>
-            <h1 className='medium-header-fonts'>YOUR LISTS:</h1>
-            {initialLists.length > 0 && <ListsOfLists initialLists={initialLists} books={books}/>}
-            {initialLists.length == 0 && <div>
-              Add your first list!</div>}
+          <div className='content-box mx-auto'>
+            <h1 className='big-header-fonts pt-4'>BROWSE LIST</h1>
+              <div className='d-flex flex-row justify-content-between'>
+                <h1 className='medium-header-fonts pt-5'>YOUR LISTS:</h1>
+                <p className='para-fonts pt-5 mt-2'>view all</p>
+              </div>
+              <div class="h-line mb-3"></div>
+              {initialLists.length > 0 && <ListsOfLists initialLists={initialLists} books={books}/>}
+              {initialLists.length == 0 && <div>
+                Add your first list!</div>}
+          </div>
         </div>
       </>
     )

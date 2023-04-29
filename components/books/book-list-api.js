@@ -16,7 +16,7 @@ function BookList(props) {
                       <div className="book-title-table d-flex flex-column align-items-center pb-3">
                         {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
                         <Image src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={250} height={300}/>:
-                        <Image src={noimg} alt="pic of book" width={250} height={300}/>
+                        <Image src='https://depositphotos.com/418806478/stock-illustration-add-icon-vector-sign.html' alt="pic of book" width={250} height={300}/>
                       }
                       <p className="book-title pt-2">
                           {book.volumeInfo.title}

@@ -2,20 +2,32 @@ import BookItem from "./book-item";
 import Image from 'next/image';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {noimg} from '/public/no-img.png';
 
 function BookList(props) {
     const { items, isDelete, listid } = props;
     console.log(listid)
     
     return (
-      
-        <ul>
-          {items.map(book => (
-            <BookItem key={book.id} bookId={book.bookId} title={book.title} author={book.author} description={book.description} listId = {book.listId} isDelete={isDelete}
-                imageUrl = {book.imageUrl} 
-              />
+      <div>
+        <div className = "container">
+          <div className="row justify-content-md-center">
+            {items.map(book => (
+        
+              <Link className='col-12 col-sm-12 col-md-6 col-lg-4' key={book.id} href={`/books/${book.bookId}`}>
+                <div className="book-title-table d-flex flex-column align-items-center pb-3">
+                  {book.imageUrl !=null ?
+                      <Image src={book.imageUrl} alt="pic of book" width={500} height={500}/>: <Image src={noimg} alt="pic of book" width={500} height={500}/>
+                  }
+                  <p className="book-title pt-2">
+                      {book.title}
+                  </p>
+                </div>
+              </Link>          
           ))}
-      </ul>
+          </div>
+        </div>
+      </div>
     );
   }
 

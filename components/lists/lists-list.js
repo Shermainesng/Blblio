@@ -1,46 +1,91 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import axios from 'axios';
+import {useRouter} from 'next/router';
+import {noimg} from '../../public/no-img.png'
 
 function ListsOfLists(props) {  
+    const router = useRouter()
 
     function getImages(listId) {
         var arrUrls = []
+        for (let i=0; i<4; i++) {
+            console.log("BOOK ID HERE " + props.books[i].listId + props.books[i].imageUrl)
+        }
         var listBooks = props.books.filter(obj=>obj.listId == listId)
-        console.log(listBooks)
         for (let i=0; i< 4; i++) {
             if (listBooks[i]){
                 if (listBooks[i].imageUrl) {
                     arrUrls.push(props.books[i].imageUrl); 
                 }
             } else {
-                arrUrls.push('http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api');
+                arrUrls.push('https://st4.depositphotos.com/41287538/41880/v/1600/depositphotos_418806478-stock-illustration-add-icon-vector-sign.jpg');
             }
         }
         console.log(arrUrls);
         return arrUrls;
     }
     
+    async function handleAddBookToList(listId, bookId) {
+        console.log("this is list id " + listId)
+        console.log("this is book id " + bookId)
+        if(!bookId) {
+            return <div>loading</div>
+
+        } 
+    
+        var found = props.books.find(book => book.bookId  ==  bookId && book.listId == listId);
+        console.log(found);
+        if (typeof found == 'undefined') {
+            const {bookonlist} = await axios.post('/api/booksonlist', {
+                listId: listId,
+                bookId: bookId
+            })
+            const {bookadded} = await axios.post('/api/books', {
+                bookId: bookId,
+                listId: listId, 
+                title: props.book.volumeInfo.title, 
+                author: props.book.volumeInfo.authors ? props.book.volumeInfo.authors[0]: "no author", 
+                publisher: props.book.volumeInfo.publisher, 
+                publishedDate: props.book.volumeInfo.publishedDate,
+                category: props.book.volumeInfo.categories ? props.book.volumeInfo.categories[0] : "fake category",
+                imageUrl: props.book.volumeInfo.imageLinks.thumbnail ? props.book.volumeInfo.imageLinks.thumbnail : 'http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+                description: props.book.volumeInfo.description ? props.book.volumeInfo.description: "this is"
+            })
+            router.push(`/books`);
+
+        } else {
+            alert("book is already in your list!")
+        }
+    }
+
     return(
-        <ul>
-            {props.initialLists.map(list => {
-                var imageArr = getImages(list.id)
-                console.log("this is it")
-                console.log(imageArr)
-                return (
-                <li key={list.id}>
-                    <div id="cover-img">
-                        <Image src={imageArr[0]} alt="pic of book" width={40} height={60}/>
-                        <Image src={imageArr[1]} alt="pic of book" width={40} height={60}/>
-                        <Image src={imageArr[2]} alt="pic of book" width={40} height={60}/>
-                        <Image src={imageArr[3]} alt="pic of book" width={40} height={60}/>
-                     </div>
-                    {list.title}, {list.description}
-                    <Link href={`/lists/${list.id}`}>
-                        View List
-                    </Link>
-                </li>
-            )})}
-        </ul>
+        <div className='horizontal-scroll'>
+            <div>
+                {props.initialLists.map(list => {
+                    var imageArr = getImages(list.id)
+                    console.log(imageArr + "test")
+                    return (
+                        <div className='list-block' key={list.id}>
+                            <div id="cover-img text-center">
+                                <Image src={imageArr[0]} alt="pic of book" width={60} height={75}/>
+                                <Image src={imageArr[1]} alt="pic of book" width={60} height={75}/><br/>
+                                <Image src={imageArr[2]} alt="pic of book" width={60} height={75}/>
+                                <Image src={imageArr[3]} alt="pic of book" width={60} height={75}/>
+                            </div>
+                            <div className='list-desc pt-3'>
+                                <div className='small-header-fonts'>{list.title}</div>
+                                <div className='para-fonts'>{list.description}</div>
+                                <Link href={`/lists/${list.id}`}>
+                                    View List
+                                </Link>
+                                {props.canAddToList && <button onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
+                            </div>
+                        </div>
+                )})}
+            </div>
+
+        </div>
     )
 }
 
