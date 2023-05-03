@@ -7,11 +7,10 @@ import {noimg} from '../../public/no-img.png'
 function ListsOfLists(props) {  
     const router = useRouter()
 
+    console.log(props.initialLists)
+
     function getImages(listId) {
         var arrUrls = []
-        for (let i=0; i<4; i++) {
-            console.log("BOOK ID HERE " + props.books[i].listId + props.books[i].imageUrl)
-        }
         var listBooks = props.books.filter(obj=>obj.listId == listId)
         for (let i=0; i< 4; i++) {
             if (listBooks[i]){
@@ -62,16 +61,16 @@ function ListsOfLists(props) {
     return(
         <div className='horizontal-scroll'>
             <div>
-                {props.initialLists.map(list => {
+                {props.books.length != 0 && props.initialLists.map(list => {
                     var imageArr = getImages(list.id)
                     console.log(imageArr + "test")
                     return (
                         <div className='list-block' key={list.id}>
                             <div id="cover-img text-center">
-                                <Image src={imageArr[0]} alt="pic of book" width={60} height={75}/>
-                                <Image src={imageArr[1]} alt="pic of book" width={60} height={75}/><br/>
-                                <Image src={imageArr[2]} alt="pic of book" width={60} height={75}/>
-                                <Image src={imageArr[3]} alt="pic of book" width={60} height={75}/>
+                                <Image src={imageArr[0]} alt="pic of book" width={70} height={85}/>
+                                <Image src={imageArr[1]} alt="pic of book" width={70} height={85}/><br/>
+                                <Image src={imageArr[2]} alt="pic of book" width={70} height={85}/>
+                                <Image src={imageArr[3]} alt="pic of book" width={70} height={85}/>
                             </div>
                             <div className='list-desc pt-3'>
                                 <div className='small-header-fonts'>{list.title}</div>
@@ -83,6 +82,27 @@ function ListsOfLists(props) {
                             </div>
                         </div>
                 )})}
+            </div>
+
+            <div>
+                {props.books.length == 0 &&  props.initialLists.map(list => (
+                    <div key={list.id}>
+                        <div className='list-desc pt-3'>
+                            <div className='small-header-fonts'>{list.title}</div>
+                            <div className='para-fonts'>{list.description}</div>
+                            <Link href={`/lists/${list.id}`}>
+                                View List
+                            </Link>
+                            {props.canAddToList && <button onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
+                        </div>
+                    </div>
+                ))} 
+                
+                {/* // && props.initialLists.map(list => {
+                //     <div key={list.id}>
+                //         <div>hi</div>
+                //     </div>
+                // })}                 */}
             </div>
 
         </div>

@@ -1,7 +1,7 @@
 import { prisma } from "@/server/db/client"
 export default async function handler(req, res) {
     const {method} = req
-    const {bookId, listId, title, author, publisher, publishedDate, category, imageUrl, description} = req.body
+    const {bookId, id, listId, title, author, publisher, publishedDate, category, imageUrl, description} = req.body
     switch (method) {
         case 'POST': 
             const book = await prisma.Book.create({
@@ -21,10 +21,9 @@ export default async function handler(req, res) {
             console.log("added to book table")
             break
         case 'DELETE':
-            const deleteBook = await prisma.Book.deleteMany({
+            const deleteBook = await prisma.Book.delete({
                 where: {
-                    listId: listId,
-                    bookId: bookId
+                    id: id
                 }
             })
             res.status(200).json(deleteBook);

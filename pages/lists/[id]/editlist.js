@@ -25,7 +25,7 @@ export default function EditList({list, initialBooks}) {
     
 
     return (
-        <div>
+        <div className='bg-pink'>
         <h1>Edit the list!</h1>
         <h2>Title: {list.title}</h2>
             <form onSubmit = {handleEdit}> 

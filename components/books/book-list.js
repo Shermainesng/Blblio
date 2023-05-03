@@ -13,17 +13,20 @@ function BookList(props) {
         <div className = "container">
           <div className="row justify-content-md-center">
             {items.map(book => (
-        
-              <Link className='col-12 col-sm-12 col-md-6 col-lg-4' key={book.id} href={`/books/${book.bookId}`}>
-                <div className="book-title-table d-flex flex-column align-items-center pb-3">
-                  {book.imageUrl !=null ?
-                      <Image src={book.imageUrl} alt="pic of book" width={500} height={500}/>: <Image src={noimg} alt="pic of book" width={500} height={500}/>
-                  }
-                  <p className="book-title pt-2">
-                      {book.title}
-                  </p>
-                </div>
-              </Link>          
+              <BookItem key={book.id} book={book} isDelete={isDelete}/>
+              // <div className='col-12 col-sm-12 col-md-6 col-lg-4' key={book.id}>
+              //   <Link href={`/books/${book.bookId}`}>
+              //     <div className="book-title-table d-flex flex-column align-items-center pb-3">
+              //       {book.imageUrl !=null ?
+              //           <Image src={book.imageUrl} alt="pic of book" width={200} height={250}/>: <Image src={noimg} alt="pic of book" width={200} height={250}/>
+              //       }
+              //       <p className="book-title pt-2">
+              //           {book.title}
+              //       </p>
+              //     </div>
+              //   </Link>   
+              //   <button>Delete</button>
+              // </div>
           ))}
           </div>
         </div>

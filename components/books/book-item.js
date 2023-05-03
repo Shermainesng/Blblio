@@ -8,19 +8,19 @@ import {noimg} from '/public/no-img.png';
 
 function BookItem(props) {
     const router = useRouter()
-
+    console.log(props.book.bookId)
     async function handleDelete() {
-        if(props.bookId) {
+        if(props.book.bookId) {
             const {data} = await axios.delete('/api/booksonlist', {
                 data: {
-                    listId:props.listId,
-                    bookId:props.bookId
+                    listId:props.book.listId,
+                    bookId:props.book.bookId
                 }
             })
             const {deleteBook} = await axios.delete('/api/books', {
                 data: {
-                    listId: props.listid, 
-                    bookId: props.bookId
+                    listId: props.book.listId, 
+                    id: props.book.id
                 }
             })
 
@@ -28,18 +28,23 @@ function BookItem(props) {
         router.reload()
     }
     return (
-        <div className='book-title-table d-flex flex-column align-items-center pb-3'>
-
-            <Link href={`/books/${props.bookId}`}>
-                <h1>Title: {props.title}</h1>
-                {props.imageUrl !=null ?
-                    <Image src={props.imageUrl} alt="pic of book" width={500} height={500}/>: <Image src={noimg} alt="pic of book" width={500} height={500}/>
+        <div className='col-12 col-sm-12 col-md-6 col-lg-4'>
+            <Link href={`/books/${props.book.bookId}`}>
+                <div className="book-title-table d-flex flex-column align-items-center pb-3">
+                {props.book.imageUrl !=null ?
+                    <Image src={props.book.imageUrl} alt="pic of book" width={200} height={250}/>: <Image src='/no-img.png' alt="pic of book" width={200} height={250}/>
                 }
-            </Link>
-            
+                <p className="book-title pt-2">
+                    {props.book.title}
+                </p>
+                </div>
+            </Link>   
+             
+
             {props.isDelete ? 
                 <button onClick={()=>handleDelete()}>Delete this book</button>: <p></p>
             }
+     
         </div>
     )
 }
