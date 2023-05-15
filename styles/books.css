@@ -37,3 +37,11 @@
     width: 60%;
     
 }
+
+.scrollable-row {
+    display:flex;
+    overflow: auto;
+    overflow-x:scroll;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}

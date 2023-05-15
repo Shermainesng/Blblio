@@ -1,18 +1,18 @@
 import Image from 'next/image';
-import BookItem from "./book-item";
 import Link from 'next/link';
-import noimg from '/public/no-img.png';
+
 
 function BookList(props) {
     const { items } = props;
   
+   
+  
     return (
       <div>
           <div className = "container">
-            <div className="row justify-content-md-center">
+            <div className={`row justify-content-md-center scrollable-row ${props.scrollable ? "scrollable-row" : ""}`}>
+           
               {items.map(book => (
-          
-          
                   <Link className='col-12 col-sm-12 col-md-6 col-lg-4' key={book.id} href={`/books/${book.id}`}>
                       <div className="book-title-table d-flex flex-column align-items-center pb-3">
                         {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
@@ -25,12 +25,9 @@ function BookList(props) {
                         
                       </div>
                   </Link>
-
-              ))}
+              ))} 
 
             </div>
-        
-         
           </div>
       </div>
     );

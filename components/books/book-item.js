@@ -31,8 +31,9 @@ function BookItem(props) {
         <div className='col-12 col-sm-12 col-md-6 col-lg-4'>
             <Link href={`/books/${props.book.bookId}`}>
                 <div className="book-title-table d-flex flex-column align-items-center pb-3">
-                {props.book.imageUrl !=null ?
-                    <Image src={props.book.imageUrl} alt="pic of book" width={200} height={250}/>: <Image src='/no-img.png' alt="pic of book" width={200} height={250}/>
+                {typeof props.book.imageUrl !=null ?
+                    <Image src={props.book.imageUrl} alt="pic of book" width={250} height={300}/>: 
+                    <Image src='/no-img.png' alt="pic of book" width={250} height={300}/>
                 }
                 <p className="book-title pt-2">
                     {props.book.title}
