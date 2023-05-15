@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+
 export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -9,13 +12,13 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item ">
-                    <a className="nav-link active medium-header-fonts" aria-current="page" href="#">BOOKS</a>
+                    <Link className="nav-link active medium-header-fonts" aria-current="page" href="#">BOOKS</Link>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link medium-header-fonts" href="/lists">LIST</a>
+                    <Link className="nav-link medium-header-fonts" href="/lists">LIST</Link>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link medium-header-fonts" href="#">ABOUT</a>
+                    <Link className="nav-link medium-header-fonts" href="#">ABOUT</Link>
                     </li>
                     <li className="nav-item">
                     <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
