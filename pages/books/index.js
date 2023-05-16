@@ -57,6 +57,12 @@ export default function AllPublicBooks() {
                 <h1 className='medium-header-fonts text-center pb-3 pt-5 mt-5'>MOST POPULAR BOOKS</h1>
                 {data && <BookListApi items={data.items} scrollable/>}
                 </div>
+
+                <div className="text-center pb-5">
+                    <Link href='/books/searchBooks'>
+                        <button className="btn btn-green px-5">Search for books</button>
+                    </Link>
+                </div>
             </div>
         
 

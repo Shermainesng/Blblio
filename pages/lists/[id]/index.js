@@ -11,6 +11,7 @@ export default function IndivList({list, books}){
     var [finalbooks, setBooks] = useState([])
     var [loading, setLoading] = useState(false)
     const [isDelete] = useState(true);
+    const router = useRouter();
 
 
     async function handleDelete() {
@@ -20,6 +21,7 @@ export default function IndivList({list, books}){
             }
         })
         console.log(list.id);
+        router.push('/lists');
     }
 
     return(

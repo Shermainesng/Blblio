@@ -19,6 +19,11 @@ export default function AllLists({initialLists, books}) {
               {initialLists.length > 0 && <ListsOfLists initialLists={initialLists} books={books}/>}
               {initialLists.length == 0 && <div>
                 Add your first list!</div>}
+                <div className='text-center'>
+                  <Link href='/lists/addlist'>
+                    <button className='btn btn-yellow px-5 my-4'>Add New List</button>
+                  </Link>
+                </div>
           </div>
         </div>
       </>

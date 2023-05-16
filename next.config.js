@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+               {
+                   source: '/',
+                   destination: '/books',
+                   permanent: true,
+                },
+           ]
+   },
   reactStrictMode: false,
   swcMinify:true,
   images: {
@@ -12,3 +21,4 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+

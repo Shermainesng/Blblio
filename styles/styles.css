@@ -48,7 +48,16 @@
     background-color: #FDE374;
 }
 
+.btn-green{
+    background-color: #9BD08B;
+    width:50%;
+}
+
 .btn-yellow:hover {
+    background-color: #CCA59A;
+}
+
+.btn-green:hover {
     background-color: #CCA59A;
 }
 
