@@ -4,7 +4,6 @@ import Image from 'next/image';
 import AddBookToList from './add-book-to-list';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import {noimg} from '/public/no-img.png';
 
 function BookItem(props) {
     const router = useRouter()

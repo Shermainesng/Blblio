@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import {useRouter} from 'next/router';
-import {noimg} from '../../public/no-img.png'
 
 function ListsOfLists(props) {  
     const router = useRouter()

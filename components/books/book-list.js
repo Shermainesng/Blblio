@@ -2,8 +2,6 @@ import BookItem from "./book-item";
 import Image from 'next/image';
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {noimg} from '/public/no-img.png';
-
 function BookList(props) {
     const { items, isDelete, listid } = props;
     console.log(listid)

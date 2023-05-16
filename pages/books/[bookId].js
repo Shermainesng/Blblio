@@ -6,7 +6,6 @@ import BookItem from '@/components/books/book-item';
 import axios from "axios";
 import Image from 'next/image';
 import {PrismaClient} from '@prisma/client';
-import {noimg} from '/public/no-img.png';
 
 export default function BookDetails({book, lists, booksInAllLists, allBooks}) {
     const [isShown, setIsShown] = useState(false);
@@ -44,7 +43,7 @@ export default function BookDetails({book, lists, booksInAllLists, allBooks}) {
 
             {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
                 <Image className='image-center my-4' src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={300} height={330}/>:
-                <Image src={noimg} alt="pic of book" width={300} height={300}/>
+                <Image src='/no-img' alt="pic of book" width={300} height={300}/>
               }
             
             <div className='book-desc-text mx-auto text-center para-fonts'>
