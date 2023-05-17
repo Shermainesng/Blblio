@@ -17,7 +17,8 @@ const nextConfig = {
       "st4.depositphotos.com", 
       "depositphotos.com"
     ]
-  }
+  },
+  pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js']
 }
 
 module.exports = nextConfig
