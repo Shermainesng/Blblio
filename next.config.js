@@ -18,7 +18,7 @@ const nextConfig = {
       "depositphotos.com"
     ]
   },
-  pageExtensions: ['page.js']
+  // pageExtensions: ['page.js']
 }
 
 module.exports = nextConfig
