@@ -10,10 +10,10 @@ const SearchInput = () => {
   const categoryInputRef = useRef();
   const authorInputRef = useRef();
   var SQ;
-  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [searchResults, setSearchResults] = useState("")
-  const [isSubmit, setIsSubmit] = useState(false)
+  const [isSubmit, setIsSubmit] = useState(true)
+  const [isLoadMore, setIsLoadMore] = useState(false)
   const axios = require('axios')
 
 
@@ -32,60 +32,57 @@ const SearchInput = () => {
 
   async function filterBooksHandler(encodedAuthor, encodedCat) {
       await axios
-          .get(`https://www.googleapis.com/books/v1/volumes?q=${encodedCat}+inauthor:${encodedAuthor}&maxResults=15`)
+          .get(`https://www.googleapis.com/books/v1/volumes?q=${encodedCat}+inauthor:${encodedAuthor}&maxResults=16`)
           .then(function(response) {
               console.log(response)
               setSearchResults(response.data.items);
           })
   }
 
-  const onSearch = async (e) => {
+  async function onSearch(e) {
     e.preventDefault();
     if (e.target.value==""){return}
     setLoading(true);
     const encodedSearchQuery = encodeURI(SQ);
+    setIsSubmit(false)
     await axios
-      .get(`https://www.googleapis.com/books/v1/volumes?q=${encodedSearchQuery}&maxResults=15`)
+      .get(`https://www.googleapis.com/books/v1/volumes?q=${encodedSearchQuery}&maxResults=16`)
       .then(function(response) {
         // console.log(response.data.items)
         // setSearchResults(response.data.items);
         filterResponseData(response.data.items);
         setLoading(false)
     })
-    setIsSubmit(false)
-  }
-
-  function onSubmit() {
     setIsSubmit(true)
-    onSearch()
   }
-
 
   function filterResponseData(unfilteredResponses) {
     let arrResponses = [];
     for (let i=0; i< unfilteredResponses.length; i++) {
-      if (unfilteredResponses[i].volumeInfo.title.toLowerCase() != 'undefined') {
-        arrResponses.push(unfilteredResponses[i]);
-        console.log(unfilteredResponses[i].volumeInfo.title)
+      if(unfilteredResponses[i].volumeInfo.title) {
+        if (unfilteredResponses[i].volumeInfo.title.toLowerCase() != 'undefined') {
+          arrResponses.push(unfilteredResponses[i]);
+          console.log(unfilteredResponses[i].volumeInfo.title)
+        }
       }
     }
     setSearchResults(arrResponses);
+    // if (!isSubmit) {
+    //   setSearchResults(arrResponses.slice(0,5))
+    // } else {
+    //   setSearchResults(searchResultsFull);
+    //   console.log(searchResults)
+    // }
   }
 
   return (
-    <div>
-       <form onSubmit={submitHandler} >
-          <label htmlFor="category">Category</label>
-          <input type='text' id='category' ref={categoryInputRef}>
-          </input>
-
-          <label htmlFor="category">Author</label>
-          <input type='text' id='author' ref={authorInputRef}></input>
-          <div className='btn btn-primary' onClick={(e)=>submitHandler(e)}>Search</div>
-       </form>
-
-      <form className="d-flex justify-content-center py-4" onSubmit={(e) => {setIsSubmit(true); e.preventDefault();}}>
-        <input
+    <div className='row'>
+      <h1 className='big-header-fonts p-3'>Search Books:</h1>
+      {/* <form className="col d-flex justify-content-start align-items-center" onSubmit={(e)=>onSearchSubmit(e)}> */}
+      <form className="col d-flex justify-content-start align-items-center">
+      <label htmlFor="search">Type to start searching:</label>
+        <input 
+          className='input-field search-field mx-2'
           value={SQ}
           onChange={(e) => {
             SQ = e.target.value 
@@ -93,16 +90,24 @@ const SearchInput = () => {
             // setSearchQuery(e.target.value);
             onSearch(e);
           }}
-          placeholder="Search for book"
+          placeholder="The Hunger Games"
           />
-           <button onClick={()=>onSubmit}>Search</button>
       </form>
+       
+       <form className='col d-flex justify-content-center justify-content-start align-items-center'>
+          <label htmlFor="category">Category</label>
+          <input className='input-field mx-2' type='text' id='category' ref={categoryInputRef} placeholder="Romance">
+          </input>
 
-      <div className = "container">
+          <label htmlFor="category">Author</label>
+          <input className='input-field mx-2' type='text' id='author' ref={authorInputRef} placeholder="Stephen King"></input>
+          <div className='btn btn-pink' onClick={(e)=>submitHandler(e)}>Search</div>
+       </form>
+
+
+      <div className = "container pt-4">
         <div className="row justify-content-md-center">
-          {searchResults &&
-            <BookList items={searchResults.slice(0,5)}/>}
-          {searchResults && isSubmit &&
+        {searchResults &&
             <BookList items={searchResults}/>}
         </div>
       </div>

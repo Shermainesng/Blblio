@@ -1,10 +1,14 @@
 import {prisma} from '../../server/db/client'
 import Link from 'next/link'
 import ListsOfLists from '@/components/lists/lists-list';
+import {useSession, getSession} from 'next-auth/client'
 
-export default function AllLists({initialLists, books}) {
+export default function AllLists({initialLists, books, user}) {
+
     const lists = [];
-    console.log(books)
+    console.log("this is user")
+    console.log(user)
+    console.log(initialLists)
 
     return (
       <>
@@ -31,15 +35,35 @@ export default function AllLists({initialLists, books}) {
 }
 
     //GET DATA FROM PRISMADB 
-export async function getServerSideProps() {
-    const lists = await prisma.List.findMany();
+export async function getServerSideProps(context) {
+  const session = await getSession({req: context.req})
+    if (!session) {
+      return {
+          redirect: {
+              destination: '/auth',
+              permanent: false
+          }
+      }
+  }
+  const user = await prisma.User.findFirst({
+    where: {
+        email:session.user.email,
+        }
+    });
+
+    const lists = await prisma.List.findMany({
+      where: {
+          userId: user.id,
+          }
+      });
 
     const books = await prisma.Book.findMany();
+    
     return {
       props: {
         initialLists: lists,
         books: books,
+        user
       }
     };
   }
-

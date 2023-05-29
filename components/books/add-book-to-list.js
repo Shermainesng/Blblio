@@ -2,18 +2,19 @@ import axios from 'axios';
 import {useRouter} from 'next/router';
 import ListsOfLists from '../lists/lists-list';
 import { useState } from 'react';
+import Link from 'next/link';
+import {useSession, getSession} from 'next-auth/client'
+import {PrismaClient} from '@prisma/client';
 
 export default function AddBookToList(props) {
     const router = useRouter()
     const [canAddToList, setCanAddToList] = useState(true);
 
-
-    console.log("HI " + props.books)
-  
-
     function handleCancel() {
         {props.setIsShown(false)}
     }
+
+    
 
     async function handleAddBookToList(listId, bookId) {
         console.log("this is list id " + listId)
@@ -54,18 +55,51 @@ export default function AddBookToList(props) {
            
             <div className='d-flex flex-column'>
                 <h2 className='medium-header-fonts'>YOUR LISTS:</h2>
-                {/* {props.lists.map(list => (
-                    <div key={list.id}>
-                        <button onClick={()=>handleAddBookToList(list.id, props.book.id)}>{list.title}</button>
-                    </div>
-
-                ))} */}
-                <ListsOfLists initialLists={props.lists} canAddToList={canAddToList} books={props.books} book={props.book}/>
-                <button className="btn btn-yellow" onClick={()=>handleCancel()}>Cancel</button> 
-            </div>
-
+                {props.lists.length > 0 ? 
+                <div>
+                    <ListsOfLists initialLists={props.lists} canAddToList={canAddToList} books={props.books} book={props.book}/>
+                    <button className="btn btn-yellow" onClick={()=>handleCancel()}>Cancel</button> 
+                </div>:
+                <div>
+                    <h2>You have no lists yet. Create one now and start adding your favourite books to it!</h2>
+                    <button className='btn btn-pink'>
+                        <Link href='/lists/addlist'>Create a list</Link>
+                    </button>
+                    <button className="btn btn-yellow mx-3" onClick={()=>handleCancel()}>Cancel</button> 
+                </div>
+                }
+            </div>  
         </div>
     )
 }
 
 
+// export async function getServerSideProps(context) {
+//     const session = await getSession({req: context.req})
+//     if (!session) {
+//       return {
+//           redirect: {
+//               destination: '/auth',
+//               permanent: false
+//           }
+//       }
+//   }
+//     const user = await prisma.User.findFirst({
+//         where: {
+//             email:session.user.email,
+//             }
+//         });
+
+//     const lists = await prisma.List.findMany({
+//         where: {
+//             userId: user.id,
+//             }
+//         });
+
+//     return {
+//         props: {
+//             lists,
+//             user
+//         }
+//     }
+// }

@@ -25,19 +25,24 @@ export default function IndivList({list, books}){
     }
 
     return(
-        <div className='bg-pink container-fluid'>
-            <div className='content-box mx-auto pt-3'>
+        <div className='bg-pink'>
+            <div className='d-flex flex-column text-center pt-4 pb-5'>
                 <h1 className='big-header-fonts'>{list.title}</h1>
                 <p className='small-header-fonts'>{list.description}</p>
-                
-                <Link href={`/lists/${list.id}/editlist`}>
-                    <button className='btn btn-yellow'>Edit this list</button>
-                </Link>
+                <div className='pt-3'>
+                    <Link href={`/lists/${list.id}/editlist`}>
+                        <button className='btn btn-yellow mx-3'>Edit this list</button>
+                    </Link>
                     
-                <button className='btn btn-yellow' onClick={()=>handleDelete()}>Delete this list</button>
-                <BookList items={books} isDelete={!isDelete}/>
+                    <button className='btn btn-yellow' onClick={()=>handleDelete()}>Delete this list</button>
+                </div>
             </div>
- 
+            <BookList items={books} isDelete={!isDelete}/>
+            <div className='text-center pb-5'>
+                <Link href={`/books`}>
+                    <button className='btn btn-green mx-3'>Add books to your list!</button>
+                </Link>
+            </div>
         </div>
     )
 

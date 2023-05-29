@@ -4,7 +4,7 @@
 
 
 .bg-orange {
-    background-color: #F3744A;
+    background-color: #F79F4D;
     min-height:100vh;
 }
 
@@ -53,12 +53,21 @@
     width:50%;
 }
 
+.btn-pink{
+    background-color: #F8B5B8;
+}
+
 .btn-yellow:hover {
     background-color: #CCA59A;
 }
 
 .btn-green:hover {
     background-color: #CCA59A;
+}
+
+.custom-btn {
+    border: none;
+    background: none;
 }
 
 .h-line {

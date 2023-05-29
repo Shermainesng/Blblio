@@ -6,7 +6,14 @@ import {useRouter} from 'next/router';
 function ListsOfLists(props) {  
     const router = useRouter()
 
-    console.log(props.initialLists)
+
+    function descTrimmer(description) {
+        if (description.length > 40) {
+          var trimDesc = description.slice(0, 40);
+          description = trimDesc
+        }
+        return description + "...";
+      }
 
     function getImages(listId) {
         var arrUrls = []
@@ -20,7 +27,6 @@ function ListsOfLists(props) {
                 arrUrls.push('https://st4.depositphotos.com/41287538/41880/v/1600/depositphotos_418806478-stock-illustration-add-icon-vector-sign.jpg');
             }
         }
-        console.log(arrUrls);
         return arrUrls;
     }
     
@@ -29,7 +35,6 @@ function ListsOfLists(props) {
         console.log("this is book id " + bookId)
         if(!bookId) {
             return <div>loading</div>
-
         } 
     
         var found = props.books.find(book => book.bookId  ==  bookId && book.listId == listId);
@@ -50,7 +55,7 @@ function ListsOfLists(props) {
                 imageUrl: props.book.volumeInfo.imageLinks.thumbnail ? props.book.volumeInfo.imageLinks.thumbnail : 'http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
                 description: props.book.volumeInfo.description ? props.book.volumeInfo.description: "this is"
             })
-            router.push(`/books`);
+            router.push(`/lists`);
 
         } else {
             alert("book is already in your list!")
@@ -73,7 +78,7 @@ function ListsOfLists(props) {
                             </div>
                             <div className='list-desc pt-3'>
                                 <div className='small-header-fonts'>{list.title}</div>
-                                <div className='para-fonts'>{list.description}</div>
+                                <div className='para-fonts'>{descTrimmer(list.description)}</div>
                                 <Link href={`/lists/${list.id}`}>
                                     View List
                                 </Link>
@@ -90,9 +95,11 @@ function ListsOfLists(props) {
                             <div className='small-header-fonts'>{list.title}</div>
                             <div className='para-fonts'>{list.description}</div>
                             <Link href={`/lists/${list.id}`}>
-                                View List
+                                <button className='btn btn-yellow'>     
+                                        View List
+                                </button>
                             </Link>
-                            {props.canAddToList && <button onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
+                            {props.canAddToList && <button className='btn btn-yellow' onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
                         </div>
                     </div>
                 ))} 

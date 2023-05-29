@@ -45,3 +45,28 @@
     white-space: nowrap;
     flex-wrap: nowrap;
 }
+
+.book-cover:hover {
+-o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+  box-shadow: 10px 10px 5px #888888;
+}
+.input-field {
+    background-color:#F7EC74;
+    border: none;
+    color: black;
+}
+
+.search-field {
+    width: 30%;
+}
+
+.trash-icon {
+    color:white;
+}
+.trash-icon:hover {
+    color:yellow
+}

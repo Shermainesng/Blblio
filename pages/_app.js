@@ -7,6 +7,7 @@ import 'styles/styles.css'
 import {useRouter} from "next/router";
 import {useEffect} from "react";
 import Navbar from "@/components/ui/Navbar";
+import {Provider} from 'next-auth/client'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -19,8 +20,11 @@ export default function App({ Component, pageProps }) {
 
   return (
       <div>
-        <Navbar/>
-         <Component {...pageProps} />
+        <Provider session={pageProps.session}>
+          <Navbar/>
+            <Component {...pageProps} />
+            </Provider>
       </div>
   )
 }
+

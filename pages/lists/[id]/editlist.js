@@ -1,5 +1,6 @@
 import BookList from '@/components/books/book-list';
 import axios from 'axios'
+import Link from 'next/link';
 import {useRouter} from 'next/router';
 import { useRef,useState } from 'react'
 
@@ -26,21 +27,27 @@ export default function EditList({list, initialBooks}) {
 
     return (
         <div className='bg-pink'>
-        <h1>Edit the list!</h1>
-        <h2>Title: {list.title}</h2>
-            <form onSubmit = {handleEdit}> 
-                <div>
-                    <label htmlFor='title'>Title of your list:</label>
-                    <input type='text' id='title' defaultValue={list.title} ref={titleInputRef}/>
-                </div>
-                <div>
-                    <label htmlFor='description'>Describe your list:</label>
-                    <input type='text' id='description' defaultValue={list.description} ref={descriptionInputRef}/>
-                </div>
-                <button>Save Changes</button>
-            </form>
-            <h1>All your books:</h1>
+            <div className='d-flex flex-column text-center pt-4 pb-5'>
+                <h2>Edit your list:</h2>
+                <form onSubmit = {handleEdit}> 
+                    <div>
+                        {/* <label className='medium-header-fonts' htmlFor='title'>Title of your list:</label> */}
+                        <input className='input-field big-header-fonts mb-2 text-center' type='text' id='title' defaultValue={list.title} ref={titleInputRef}/>
+                    </div>
+                    <div>
+                        {/* <label className='medium-header-fonts' htmlFor='description'>Describe your list:</label> */}
+                        <textarea className='input-field small-header-fonts text-center' type='text' id='description' defaultValue={list.description} ref={descriptionInputRef}/>
+                    </div>
+                    <button className='mt-4 btn btn-yellow'>Save changes</button>
+                </form>
+            </div>
                 <BookList items={initialBooks} isDelete={isDelete}/>
+            
+            <div className='text-center pb-5'>
+                <Link href={`/books`}>
+                    <button className='btn btn-green mx-3'>Add more books to your list!</button>
+                </Link>
+            </div>
         </div>
     )
 }

@@ -16,7 +16,13 @@ export default function AllPublicBooks() {
     if(!data) return <div>loading</div>
     console.log(data)
 
-    
+    async function createUser() {
+        const {data} = await axios.post('/api/users', {
+            data: {
+                id:1
+            }
+        })
+    }
     return(
         <div>
             <div className='bg-yellow d-flex justify-content-around align-items-center pt-5 pb-3'>
@@ -52,7 +58,7 @@ export default function AllPublicBooks() {
                         </Link>
                     </div>
                 </div>
-
+                
                 <div>
                 <h1 className='medium-header-fonts text-center pb-3 pt-5 mt-5'>MOST POPULAR BOOKS</h1>
                 {data && <BookListApi items={data.items} scrollable/>}
@@ -63,6 +69,7 @@ export default function AllPublicBooks() {
                         <button className="btn btn-green px-5">Search for books</button>
                     </Link>
                 </div>
+
             </div>
         
 

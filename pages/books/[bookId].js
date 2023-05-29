@@ -6,14 +6,14 @@ import BookItem from '@/components/books/book-item';
 import axios from "axios";
 import Image from 'next/image';
 import {PrismaClient} from '@prisma/client';
+import {useSession, getSession} from 'next-auth/client'
 
-export default function BookDetails({book, lists, booksInAllLists, allBooks}) {
+export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
     const [isShown, setIsShown] = useState(false);
+    const [session,loading] = useSession();
 
     const router = useRouter();
     const bookId = router.query.bookId;
-
-    console.log(booksInAllLists)
 
     function handleClick(e) {
         setIsShown(true);
@@ -50,31 +50,59 @@ export default function BookDetails({book, lists, booksInAllLists, allBooks}) {
                 <p>{stripTags(book.volumeInfo.description)}</p>
             </div>
 
+            {session ? 
             <div className='text-center'>
                 <button className="btn btn-yellow px-5 my-4" onClick={()=>handleClick()}>Add book to a list</button>
-                {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} lists={lists} booksInAllLists={booksInAllLists} books={allBooks}/>:null}
+                {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} booksInAllLists={booksInAllLists} lists={lists} books={allBooks}/>:null} 
+            </div>:
+            <div className='text-center'>
+                <h2 className='pt-3 medium-header-fonts'>Log in first to add books to lists!</h2>
+                <Link href='/auth'>
+                    <button className='btn btn-yellow'>Log In/Sign up</button>
+                </Link>
             </div>
-
-        
+            }
         </div>
     )
 }
 
 export async function getServerSideProps(context) {
-    const prisma = new PrismaClient();
+    const session = await getSession({req: context.req})
+    if (!session) {
+      return {
+          redirect: {
+              destination: '/auth',
+              permanent: false
+          }
+      }
+  }
+  const user = await prisma.User.findFirst({
+    where: {
+        email:session.user.email,
+        }
+    });
+
+    const lists = await prisma.List.findMany({
+      where: {
+          userId: user.id,
+          }
+      });
+
     var bookIdString = context.params.bookId;
+    // const session = await getSession({req: context.req})
 
     var res = await fetch (`https://www.googleapis.com/books/v1/volumes/${bookIdString}`)
     const book = await res.json()
-    const lists = await prisma.List.findMany();
     const booksInAllLists = await prisma.booksOnLists.findMany();
     const allBooks = await prisma.Book.findMany()
+   
+    
     return {
         props: {
             book,
-            lists,
             booksInAllLists: JSON.parse(JSON.stringify(booksInAllLists)),
-            allBooks
+            allBooks,
+            lists
         }
     }
 }

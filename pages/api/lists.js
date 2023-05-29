@@ -33,7 +33,17 @@ export default async function handler(req, res) {
             res.status(200).json(updateList);
             break
         case 'DELETE':
-            const deleteList = await prisma.list.delete({
+            const deleteBooksOnList= await prisma.booksOnLists.deleteMany({
+                where: {
+                    listId: id,
+                }
+            })
+            const deleteBooksInList = await prisma.Book.deleteMany({
+                where: {
+                    listId: id,
+                }
+            })
+            const deleteList = await prisma.List.delete({
                 where: {
                     id: id,
                 }
