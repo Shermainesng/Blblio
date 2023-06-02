@@ -79,7 +79,7 @@ const SearchInput = () => {
     <div className='row'>
       <h1 className='big-header-fonts p-3'>Search Books:</h1>
       {/* <form className="col d-flex justify-content-start align-items-center" onSubmit={(e)=>onSearchSubmit(e)}> */}
-      <form className="col d-flex justify-content-start align-items-center">
+      <form className="col-12 col-sm-12 col-md-12 col-lg-6 d-flex justify-content-start align-items-start">
       <label htmlFor="search">Type to start searching:</label>
         <input 
           className='input-field search-field mx-2'
@@ -94,14 +94,20 @@ const SearchInput = () => {
           />
       </form>
        
-       <form className='col d-flex justify-content-center justify-content-start align-items-center'>
-          <label htmlFor="category">Category</label>
-          <input className='input-field mx-2' type='text' id='category' ref={categoryInputRef} placeholder="Romance">
-          </input>
-
-          <label htmlFor="category">Author</label>
-          <input className='input-field mx-2' type='text' id='author' ref={authorInputRef} placeholder="Stephen King"></input>
-          <div className='btn btn-pink' onClick={(e)=>submitHandler(e)}>Search</div>
+       <form className='col-12 col-sm-12 col-md-12 col-lg-6 row'>
+          <div className='d-flex flex-column justify-content-center justify-content-start align-items-start'>
+            <div className='mt-1'>
+              <label htmlFor="category">Category:</label>
+              <input className='input-field mx-2' type='text' id='category' ref={categoryInputRef} placeholder="Romance">
+              </input>
+            </div>
+          
+            <div className='mt-1'>
+              <label htmlFor="category">Author:</label>
+              <input className='input-field mx-2' type='text' id='author' ref={authorInputRef} placeholder="Stephen King"></input>
+            </div>
+            <div className='btn btn-green mt-1' onClick={(e)=>submitHandler(e)}>Search</div>
+          </div>
        </form>
 
 

@@ -50,7 +50,7 @@ export default function AddBookToList(props) {
     }
    
     return(
-        <div className='bg-green'>
+        <div className='bg-green' id='down'>
             <h1  className='medium-header-fonts'>which list do you want to add {props.book.volumeInfo.title} to?</h1>
            
             <div className='d-flex flex-column'>
@@ -58,14 +58,14 @@ export default function AddBookToList(props) {
                 {props.lists.length > 0 ? 
                 <div>
                     <ListsOfLists initialLists={props.lists} canAddToList={canAddToList} books={props.books} book={props.book}/>
-                    <button className="btn btn-yellow" onClick={()=>handleCancel()}>Cancel</button> 
+                    <button className="btn btn-yellow px-5" onClick={()=>handleCancel()}>Cancel</button> 
                 </div>:
                 <div>
                     <h2>You have no lists yet. Create one now and start adding your favourite books to it!</h2>
                     <button className='btn btn-pink'>
                         <Link href='/lists/addlist'>Create a list</Link>
                     </button>
-                    <button className="btn btn-yellow mx-3" onClick={()=>handleCancel()}>Cancel</button> 
+                    <button className="btn btn-yellow mx-5 px-5" onClick={()=>handleCancel()}>Cancel</button> 
                 </div>
                 }
             </div>  

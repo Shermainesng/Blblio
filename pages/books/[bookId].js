@@ -52,7 +52,9 @@ export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
 
             {session ? 
             <div className='text-center'>
-                <button className="btn btn-yellow px-5 my-4" onClick={()=>handleClick()}>Add book to a list</button>
+                <Link href='#down'>
+                    <button className="btn btn-yellow px-5 my-4" onClick={()=>handleClick()}>Add book to a list</button>
+                </Link>
                 {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} booksInAllLists={booksInAllLists} lists={lists} books={allBooks}/>:null} 
             </div>:
             <div className='text-center'>

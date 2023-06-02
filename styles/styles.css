@@ -65,6 +65,11 @@
     background-color: #CCA59A;
 }
 
+.btn-pink:hover {
+    background-color: #FDE374;
+    color:white;
+}
+
 .custom-btn {
     border: none;
     background: none;

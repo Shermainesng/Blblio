@@ -6,7 +6,8 @@ import {useRouter} from 'next/router';
 function ListsOfLists(props) {  
     const router = useRouter()
 
-
+    console.log("books passed")
+    console.log(props.books)
     function descTrimmer(description) {
         if (description.length > 40) {
           var trimDesc = description.slice(0, 40);
@@ -17,11 +18,14 @@ function ListsOfLists(props) {
 
     function getImages(listId) {
         var arrUrls = []
+        console.log("listid here " + listId)
         var listBooks = props.books.filter(obj=>obj.listId == listId)
         for (let i=0; i< 4; i++) {
             if (listBooks[i]){
+                console.log("each listbook")
+                console.log(listBooks[i])
                 if (listBooks[i].imageUrl) {
-                    arrUrls.push(props.books[i].imageUrl); 
+                    arrUrls.push(listBooks[i].imageUrl); 
                 }
             } else {
                 arrUrls.push('https://st4.depositphotos.com/41287538/41880/v/1600/depositphotos_418806478-stock-illustration-add-icon-vector-sign.jpg');
@@ -67,7 +71,6 @@ function ListsOfLists(props) {
             <div>
                 {props.books.length != 0 && props.initialLists.map(list => {
                     var imageArr = getImages(list.id)
-                    console.log(imageArr + "test")
                     return (
                         <div className='list-block' key={list.id}>
                             <div id="cover-img text-center">
@@ -80,9 +83,12 @@ function ListsOfLists(props) {
                                 <div className='small-header-fonts'>{list.title}</div>
                                 <div className='para-fonts'>{descTrimmer(list.description)}</div>
                                 <Link href={`/lists/${list.id}`}>
-                                    View List
+                                    <button className='btn btn-pink'>     
+                                            View List
+                                    </button>
                                 </Link>
-                                {props.canAddToList && <button onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
+                                <br/>
+                                {props.canAddToList && <button className='btn btn-pink' onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
                             </div>
                         </div>
                 )})}

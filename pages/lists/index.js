@@ -7,7 +7,7 @@ export default function AllLists({initialLists, books, user}) {
 
     const lists = [];
     console.log("this is user")
-    console.log(user)
+    console.log("initialLists")
     console.log(initialLists)
 
     return (
@@ -57,7 +57,9 @@ export async function getServerSideProps(context) {
           }
       });
 
-    const books = await prisma.Book.findMany();
+    const books = await prisma.Book.findMany({
+     
+    });
     
     return {
       props: {
