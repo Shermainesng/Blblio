@@ -48,6 +48,7 @@ function AuthForm() {
                 password: enteredPassword
             })
             if (!result.error) {
+                console.log(result)
                 console.log("successful login!")
                 router.push('/books')
             } else {
