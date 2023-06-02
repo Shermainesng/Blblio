@@ -15,8 +15,8 @@ async function handler(req, res) {
       .json({
         message:
           'Invalid input.'
-      });
-      return;
+      }); 
+      return; 
   }
 
   //check if email exists alr
