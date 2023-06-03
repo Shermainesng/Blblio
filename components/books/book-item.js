@@ -35,20 +35,18 @@ function BookItem(props) {
                     <Image src={props.book.imageUrl} alt="pic of book" width={250} height={300}/>: 
                     <Image src='/no-img.png' alt="pic of book" width={250} height={300}/>
                 }
-                <div className='trash-icon pt-2'>
+                <div className='custom-title pt-2'>
                         {props.book.title}              
                 </div>
-
-                <div>
-                    {props.isDelete ? 
-                    <button className='trash-icon btn btn-pink' onClick={()=>handleDelete()}><BsTrash/>
-                    </button>
-                    : <p></p>
-                }
-                </div>
-                </div>
-            </Link>   
-     
+            </div>
+            </Link>  
+            <div className='text-center'>
+                {props.isDelete ? 
+                <button className='trash-icon btn btn-pink mb-3' onClick={()=>handleDelete()}><BsTrash/>
+                </button>
+                : <p></p>
+            }
+            </div> 
         </div>
     )
 }

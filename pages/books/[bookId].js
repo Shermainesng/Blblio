@@ -42,7 +42,10 @@ export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
 
 
             {typeof book.volumeInfo.imageLinks!= 'undefined' ? 
-                <Image className='image-center my-4' src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={300} height={330}/>:
+            <div className='d-flex justify-content-center my-4'>
+                <Image src= {book.volumeInfo.imageLinks.thumbnail} alt="pic of book" width={300} height={330}/>
+            </div>
+                :
                 <Image src='/no-img' alt="pic of book" width={300} height={300}/>
               }
             

@@ -13,25 +13,27 @@ export default function Navbar() {
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container-fluid ">
-                <Link className="navbar-brand medium-header-fonts pb-2" href="/books">biblio</Link>
+            <div className="container-fluid">
+                <div className='navbar-brand big-header-fonts pb-2' >
+                    <Link href="/books">biblio</Link>
+                </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
-                    <li className="nav-item ">
-                    <Link className="nav-link medium-header-fonts" aria-current="page" href="/books">BOOKS</Link>
+                    <li className="nav-item nav-link d-flex align-items-center medium-header-fonts">
+                    <Link aria-current="page" href="/books">BOOKS</Link>
                     </li>
-                    <li className="nav-item">
-                    <Link className="nav-link medium-header-fonts" href="/lists">LIST</Link>
+                    <li className="nav-item nav-link d-flex align-items-center medium-header-fonts">
+                    <Link className="nav-link large-header-fonts" href="/lists">LISTS</Link>
                     </li>
                     {session ?
                     <li className="nav-item">
                     <button className="nav-link custom-btn medium-header-fonts" onClick={logoutHandler}>SIGN OUT</button>
                     </li>
                     :
-                    <li className="nav-item">
+                    <li className="nav-item d-flex align-items-center">
                     <Link className="nav-link medium-header-fonts" href="/auth">SIGN IN</Link>
                     </li>
                     }

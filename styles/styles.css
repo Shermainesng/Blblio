@@ -35,6 +35,7 @@
     font-size: 1.5rem;
 }
 
+
 .small-header-fonts {
     color: black;
     font-size:1.5rem;
@@ -79,4 +80,11 @@
     border-bottom: 1px solid black;
     
     margin: auto;
+}
+/* navbar */
+.navbar-nav a:hover {
+    color: white;
+}
+.navbar-brand a:hover {
+    color: white;
 }
