@@ -58,7 +58,7 @@ export default function AddBookToList(props) {
                 {props.lists.length > 0 ? 
                 <div>
                     <ListsOfLists initialLists={props.lists} canAddToList={canAddToList} books={props.books} book={props.book}/>
-                    <button className="btn btn-yellow px-5" onClick={()=>handleCancel()}>Cancel</button> 
+                    <button className="btn btn-pink mt-2 px-5" onClick={()=>handleCancel()}>Cancel</button> 
                 </div>:
                 <div>
                     <h2>You have no lists yet. Create one now and start adding your favourite books to it!</h2>
@@ -73,33 +73,3 @@ export default function AddBookToList(props) {
     )
 }
 
-
-// export async function getServerSideProps(context) {
-//     const session = await getSession({req: context.req})
-//     if (!session) {
-//       return {
-//           redirect: {
-//               destination: '/auth',
-//               permanent: false
-//           }
-//       }
-//   }
-//     const user = await prisma.User.findFirst({
-//         where: {
-//             email:session.user.email,
-//             }
-//         });
-
-//     const lists = await prisma.List.findMany({
-//         where: {
-//             userId: user.id,
-//             }
-//         });
-
-//     return {
-//         props: {
-//             lists,
-//             user
-//         }
-//     }
-// }

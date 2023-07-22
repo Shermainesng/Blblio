@@ -97,9 +97,10 @@ function AuthForm() {
                         <input type="password" id="password" required ref={passwordInputRef}/>
                     </div>
                     <div>
-                        <button className='mx-3 px-5 btn btn-yellow' >{isLogin ? 'Login': 'Create Account'}</button>
-                        <button className='btn btn-yellow' type='button' onClick={switchAuthModeHandler}>
-                            {isLogin ? 'Create New Account': 'Login with existing account'}
+                        <button className='mx-3 px-5 mb-2 btn btn-yellow' >{isLogin ? 'Login': 'Create Account'}</button>
+                        <br/>
+                        <button className='btn btn-green' type='button' onClick={switchAuthModeHandler}>
+                            {isLogin ? 'No account? Create a new account now': 'Have an account? Login with existing account instead'}
                         </button>
                     </div>
                 </form>

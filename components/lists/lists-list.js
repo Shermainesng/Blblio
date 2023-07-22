@@ -101,11 +101,11 @@ function ListsOfLists(props) {
                             <div className='small-header-fonts'>{list.title}</div>
                             <div className='para-fonts'>{list.description}</div>
                             <Link href={`/lists/${list.id}`}>
-                                <button className='btn btn-yellow'>     
+                                <button className='btn btn-yellow px-5 me-3'>     
                                         View List
                                 </button>
                             </Link>
-                            {props.canAddToList && <button className='btn btn-yellow' onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
+                            {props.canAddToList && <button className='btn btn-yellow px-4' onClick={()=>handleAddBookToList(list.id, props.book.id)}>Add to list: {list.title}</button>}
                         </div>
                     </div>
                 ))} 
