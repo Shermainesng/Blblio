@@ -1,6 +1,6 @@
 import { hashPassword } from "@/lib/auth";
-// import { prisma } from "@/server/db/client"
-import prisma from "@/server/db/client"
+import { prisma } from "@/server/db/client"
+import { PrismaClient } from '@prisma/client';
 
 async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -9,6 +9,7 @@ async function handler(req, res) {
   const data = req.body;
   console.log(data);
   const {name, email, password} = data;
+
 
   if (!email || !email.includes('@') || !password) {
     res
@@ -33,7 +34,6 @@ async function handler(req, res) {
   }
 
   const hashedPassword = await hashPassword(password);
-
   const user = await prisma.User.create({
       data: {
           name: name,
