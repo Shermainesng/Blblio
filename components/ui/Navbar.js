@@ -29,8 +29,8 @@ export default function Navbar() {
                     <Link className="nav-link" href="/lists">LISTS</Link>
                     </li>
                     {session ?
-                    <li className="nav-item">
-                    <button className="nav-link custom-btn medium-header-fonts" onClick={logoutHandler}>SIGN OUT</button>
+                    <li className="nav-item d-flex align-items-center medium-header-fonts">
+                    <button className="nav-link custom-btn" onClick={logoutHandler}>SIGN OUT</button>
                     </li>
                     :
                     <li className="nav-item d-flex align-items-center medium-header-fonts">
