@@ -17,7 +17,7 @@ function BookList(props) {
     return (
       <div>
           <div className = "container">
-            <div className={`row justify-content-md-center ${props.scrollable ? "scrollable-row" : ""}`}>
+            <div className={`row justify-content-center ${props.scrollable ? "scrollable-row" : ""}`}>
            
               {items.map(book => (
                   <div className='col-8 col-sm-8 col-md-6 col-lg-3' key={book.id}>

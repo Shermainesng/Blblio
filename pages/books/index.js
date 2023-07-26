@@ -5,7 +5,8 @@ import useSWR from 'swr';
 import Navbar from "@/components/ui/Navbar";
 import Image from "next/image";
 import Link from "next/link";
-
+import Loading from "./loading";
+import { Suspense } from "react";
 export default function AllPublicBooks() {
     const [scrollable, setIsScrollable] = useState(true)
 
@@ -13,7 +14,7 @@ export default function AllPublicBooks() {
     const fetcher = async (url) => await axios.get(url).then((res) => res.data);
     const {data, error} = useSWR('https://www.googleapis.com/books/v1/volumes?q=most+famous+books&maxResults=30', fetcher)
     if (error) return <div>failed to load</div>
-    if(!data) return <div>loading</div>
+    // if(!data) return <div>loading</div>
     console.log(data)
 
     async function createUser() {
@@ -58,10 +59,10 @@ export default function AllPublicBooks() {
                         </Link>
                     </div>
                 </div>
-                
+
                 <div>
                 <h1 className='medium-header-fonts text-center pb-3 pt-5 mt-5'>MOST POPULAR BOOKS</h1>
-                {data && <BookListApi items={data.items} scrollable/>}
+                    {data && <BookListApi items={data.items} scrollable/>}
                 </div>
 
                 <div className="text-center pb-5">

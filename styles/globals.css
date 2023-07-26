@@ -110,6 +110,28 @@ a {
   text-decoration: none;
 }
 
+.spinner-wrapper {
+  height:500px !important;
+  width:500px;
+  top:0;
+  left:0;
+  background-color:rgb(236, 236, 184);
+  z-index:10;
+}
+
+.spinner {
+  left:50%;
+  top:50%;
+  height: 500px; 
+  width: 500px;
+  margin:0px auto;
+  --webkit-animation: rotation .5s infinite linear;
+  -moz-animation: rotation .5s infinite linear;
+  -o-animation: rotation .5s infinite linear;
+  animation: rotation .5s infinite linear;
+  border: 100px solid pink;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
