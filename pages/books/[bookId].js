@@ -6,7 +6,8 @@ import BookItem from '@/components/books/book-item';
 import axios from "axios";
 import Image from 'next/image';
 import {PrismaClient} from '@prisma/client';
-import {useSession, getSession} from 'next-auth/client'
+// import {useSession, getSession} from 'next-auth/client'
+import {useSession, getSession} from 'next-auth/react'
 import {prisma} from '../../server/db/client'
 export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
     const [isShown, setIsShown] = useState(false);

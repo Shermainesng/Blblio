@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import ListsOfLists from '../lists/lists-list';
 import { useState } from 'react';
 import Link from 'next/link';
-import {useSession, getSession} from 'next-auth/client'
+// import {useSession, getSession} from 'next-auth/client'
 import {PrismaClient} from '@prisma/client';
 
 export default function AddBookToList(props) {

@@ -1,7 +1,8 @@
 import { verifyPassword } from '@/lib/auth';
 import NextAuth from 'next-auth';
-import Providers from 'next-auth/providers';
+import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/server/db/client"
+import { SessionProvider } from 'next-auth/react';
 
 export default NextAuth({
     session: {
@@ -9,7 +10,7 @@ export default NextAuth({
         maxAge: 24 * 60 * 60,
     },
     providers: [
-        Providers.Credentials({
+        CredentialsProvider({
             async authorize(credentials) {
                 const user = await prisma.User.findFirst({
                   where: {
