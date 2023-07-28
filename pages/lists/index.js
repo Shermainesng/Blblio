@@ -1,7 +1,8 @@
 import {prisma} from '../../server/db/client'
 import Link from 'next/link'
 import ListsOfLists from '@/components/lists/lists-list';
-import {useSession, getSession} from 'next-auth/client'
+// import {useSession, getSession} from 'next-auth/client'
+import {useSession, getSession} from 'next-auth/react'
 
 export default function AllLists({initialLists, books, user}) {
 

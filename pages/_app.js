@@ -7,9 +7,9 @@ import 'styles/styles.css'
 import {useRouter} from "next/router";
 import {useEffect} from "react";
 import Navbar from "@/components/ui/Navbar";
-import {Provider} from 'next-auth/client'
+import { SessionProvider } from "next-auth/react"
+// import {Provider} from 'next-auth/client'
 import { useState } from "react";
-import NextNProgress from 'nextjs-progressbar';
 import NProgress from 'nprogress';
 
 // function Loading() {
@@ -54,12 +54,12 @@ export default function App({ Component, pageProps }) {
 
   return (
       <div>
-        <Provider session={pageProps.session}>
+        <SessionProvider session={pageProps.session}>
           <Navbar/>
             {/* <NextNProgress /> */}
             {/* <Loading/> */}
-              <Component {...pageProps} />
-            </Provider>
+            <Component {...pageProps} />
+        </SessionProvider>
       </div>
   )
 }

@@ -1,10 +1,12 @@
 import Link from "next/link";
-import {useSession, signOut} from 'next-auth/client';
+// import {useSession, signOut} from 'next-auth/client';
+import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/router";
 
 
 export default function Navbar() {
-    const [session,loading] = useSession();
+    // const [session,loading] = useSession();
+    const { data: session } = useSession()
     console.log("isloggedin?", session)
     const router = useRouter();
 

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useRef,useState } from 'react'
-import {useSession, getSession} from 'next-auth/client'
+// import {useSession, getSession} from 'next-auth/client'
+import {useSession, getSession} from 'next-auth/react'
 import { useEffect } from 'react'
 
 export default function NewList({session, user}) {
