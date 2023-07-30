@@ -1,6 +1,7 @@
 import { hashPassword } from "@/lib/auth";
 import { prisma } from "@/server/db/client"
 import { PrismaClient } from '@prisma/client';
+import { faker } from '@faker-js/faker';
 
 async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -39,6 +40,7 @@ async function handler(req, res) {
           name: name,
           email: email,
           password:hashedPassword,
+          avatar: faker.image.urlLoremFlickr({ category: 'dogs' }) 
       },
   })
   res.status(201).json({message:'created user!'});

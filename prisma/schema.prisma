@@ -16,6 +16,7 @@ model User {
   list List[]
   email String
   password String
+  avatar String
 }
 
 model List {
@@ -38,6 +39,7 @@ model Book {
   category String
   imageUrl String
   description String
+  reviews Review[]
 }
 
 model BooksOnLists {
@@ -45,5 +47,14 @@ model BooksOnLists {
   bookId String
   listId Int
   list List @relation(fields: [listId], references: [id])
+  assignedAt DateTime @default(now())
+}
+
+model Review {
+  id Int @id @default(autoincrement())
+  book Book @relation(fields:[bookId], references: [id])
+  bookId Int
+  rating Int
+  description String
   assignedAt DateTime @default(now())
 }
