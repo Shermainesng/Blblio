@@ -18,7 +18,7 @@ export default NextAuth({
                   }
                 })
 
-                console.log("user", user);
+                console.log("user iS HERE ", user);
 
                
                 if (!user || user==null) {
@@ -31,7 +31,11 @@ export default NextAuth({
                 if (!isValid) {
                     throw new Error('could not log you in');
                 }
-                return { email:user.email };
+                return {  
+                    image: user.avatar,
+                    email: user.email,
+                    name: user.name, 
+                 };
             }
         })
     ]

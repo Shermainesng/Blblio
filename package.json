@@ -17,7 +17,11 @@
     "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.2",
     "@next/font": "13.1.6",
+    "@nextui-org/react": "^1.0.0-beta.13",
     "@popperjs/core": "^2.11.6",
     "@prisma/client": "^4.16.2",
     "@railway/cli": "^3.3.1",
@@ -28,6 +32,7 @@
     "bootstrap": "^5.2.3",
     "eslint": "8.34.0",
     "eslint-config-next": "^13.4.12",
+    "facesjs": "^3.8.2",
     "gsap": "^3.11.5",
     "mysql": "^2.18.1",
     "next": "^13.4.12",
@@ -47,6 +52,7 @@
     "swr": "^2.1.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
     "dotenv-cli": "^7.2.1",
