@@ -11,7 +11,7 @@ import {useSession, getSession} from 'next-auth/react'
 import {prisma} from '../../server/db/client'
 export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
     const [isShown, setIsShown] = useState(false);
-    const [session,loading] = useSession();
+    const { data: session, status } = useSession()
 
     const router = useRouter();
     const bookId = router.query.bookId;
