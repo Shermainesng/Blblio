@@ -51,7 +51,7 @@ export default function AddBookToList(props) {
    
     return(
         <div className='bg-green' id='down'>
-            <h1  className='medium-header-fonts'>which list do you want to add {props.book.volumeInfo.title} to?</h1>
+            <h1  className='medium-header-fonts'>Which list do you want to add {props.book.volumeInfo.title} to?</h1>
            
             <div className='d-flex flex-column'>
                 <h2 className='medium-header-fonts'>YOUR LISTS:</h2>

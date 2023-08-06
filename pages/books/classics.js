@@ -18,7 +18,7 @@ export async function getServerSideProps(){
     const axios = require('axios')
     let books = [];
     await axios
-    .get(`https://www.googleapis.com/books/v1/volumes?q=subject:classics&maxResults=30`)
+    .get(`https://www.googleapis.com/books/v1/volumes?q=subject:classics&maxResults=10&KEY=AIzaSyClm-Sa7powQda-22jmYXK2MNLaRmkzmmA`)
     .then(function(response) {
         books = response.data.items
   })

@@ -14,8 +14,9 @@ const nextConfig = {
   images: {
     domains:[
       "books.google.com",
-      "st4.depositphotos.com", 
-      "depositphotos.com"
+      // "st4.depositphotos.com", 
+      "depositphotos.com",
+      "as1.ftcdn.net"
     ]
   },
   // pageExtensions: ['page.js']

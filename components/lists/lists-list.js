@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import {useRouter} from 'next/router';
+import { faker } from '@faker-js/faker';
 
 function ListsOfLists(props) {  
     const router = useRouter()
@@ -28,7 +29,7 @@ function ListsOfLists(props) {
                     arrUrls.push(listBooks[i].imageUrl); 
                 }
             } else {
-                arrUrls.push('https://st4.depositphotos.com/41287538/41880/v/1600/depositphotos_418806478-stock-illustration-add-icon-vector-sign.jpg');
+                arrUrls.push('https://as1.ftcdn.net/v2/jpg/01/09/34/82/1000_F_109348261_aanUtbiqtEPzkc2Xx3SmIwIKxDBcSYMt.jpg');
             }
         }
         return arrUrls;
@@ -56,9 +57,10 @@ function ListsOfLists(props) {
                 publisher: props.book.volumeInfo.publisher, 
                 publishedDate: props.book.volumeInfo.publishedDate,
                 category: props.book.volumeInfo.categories ? props.book.volumeInfo.categories[0] : "fake category",
-                imageUrl: props.book.volumeInfo.imageLinks.thumbnail ? props.book.volumeInfo.imageLinks.thumbnail : 'http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+                imageUrl: props.book.volumeInfo.imageLinks ? props.book.volumeInfo.imageLinks.thumbnail : 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg',
                 description: props.book.volumeInfo.description ? props.book.volumeInfo.description: "this is"
             })
+            // 'http://books.google.com/books/content?id=SAFVv6aTpFMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
             router.push(`/lists`);
 
         } else {
@@ -83,7 +85,7 @@ function ListsOfLists(props) {
                                 <div className='small-header-fonts'>{list.title}</div>
                                 <div className='para-fonts'>{descTrimmer(list.description)}</div>
                                 <Link href={`/lists/${list.id}`}>
-                                    <button className='btn btn-pink'>     
+                                    <button className='btn btn-pink my-2'>     
                                             View List
                                     </button>
                                 </Link>

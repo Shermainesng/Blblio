@@ -37,7 +37,7 @@ export default NextAuth({
                     email: user.email,
                     name: user.name, 
                  };
-                 secret: process.env.NEXTAUTH_SECRET
+              
             }
         }), 
     ]
