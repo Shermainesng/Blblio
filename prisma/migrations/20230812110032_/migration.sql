@@ -48,7 +48,9 @@ CREATE TABLE "BooksOnLists" (
 -- CreateTable
 CREATE TABLE "Review" (
     "id" SERIAL NOT NULL,
-    "bookId" INTEGER NOT NULL,
+    "userName" TEXT NOT NULL,
+    "userAvatar" TEXT NOT NULL,
+    "bookId" TEXT NOT NULL,
     "rating" INTEGER NOT NULL,
     "description" TEXT NOT NULL,
     "assignedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -56,11 +58,11 @@ CREATE TABLE "Review" (
     CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
 -- AddForeignKey
 ALTER TABLE "List" ADD CONSTRAINT "List_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "BooksOnLists" ADD CONSTRAINT "BooksOnLists_listId_fkey" FOREIGN KEY ("listId") REFERENCES "List"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Review" ADD CONSTRAINT "Review_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
