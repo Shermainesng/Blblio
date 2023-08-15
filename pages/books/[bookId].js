@@ -2,13 +2,11 @@ import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import AddBookToList from '@/components/books/add-book-to-list';
 import { useState } from 'react';
-import Review from '@/components/reviews/review';
+import ReviewList from '@/components/reviews/review-list';
 import Image from 'next/image';
-import {PrismaClient} from '@prisma/client';
-// import {useSession, getSession} from 'next-auth/client'
 import {useSession, getSession} from 'next-auth/react'
 import {prisma} from '../../server/db/client'
-export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
+export default function BookDetails({book, booksInAllLists, allBooks, lists, reviews}) {
     const [isShown, setIsShown] = useState(false);
     const { data: session, status } = useSession()
 
@@ -20,8 +18,8 @@ export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
       };
     
     if(!book) return <div>loading</div>
-
-    console.log("LOOK HERE " + book.volumeInfo.imageLinks);
+    
+    console.log(reviews[0]);
 
     function stripTags(html) {
         // var stringToStrip = ('<' + html);
@@ -62,7 +60,7 @@ export default function BookDetails({book, booksInAllLists, allBooks, lists}) {
                 <Link href='#down'>
                     <button className="btn btn-yellow px-5 my-4" onClick={()=>handleClick()}>Add book to a list</button>
                 </Link>
-                {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} booksInAllLists={booksInAllLists} lists={lists} books={allBooks}/>: null} 
+                {isShown ? <AddBookToList book={book} isShown={isShown} setIsShown={setIsShown} booksInAllLists={booksInAllLists} lists={lists} books={allBooks}/>: <ReviewList book={book} reviews={reviews}/>} 
             </div>:
             <div className='text-center'>
                 <h2 className='pt-3 medium-header-fonts'>Log in first to add books to lists!</h2>
@@ -104,6 +102,15 @@ export async function getServerSideProps(context) {
     const book = await res.json()
     const booksInAllLists = await prisma.booksOnLists.findMany();
     const allBooks = await prisma.Book.findMany()
+
+    const reviews = await prisma.Review.findMany({
+    where: {
+        bookId: bookIdString,
+        },
+    orderBy: [
+        {assignedAt: 'desc'}
+    ]
+    });
    
     
     return {
@@ -111,7 +118,8 @@ export async function getServerSideProps(context) {
             book,
             booksInAllLists: JSON.parse(JSON.stringify(booksInAllLists)),
             allBooks,
-            lists
+            lists, 
+            reviews: JSON.parse(JSON.stringify(reviews))
         }
     }
 }

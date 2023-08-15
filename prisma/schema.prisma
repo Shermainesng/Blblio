@@ -14,9 +14,10 @@ model User {
   id Int @id @default(autoincrement())
   name String
   list List[]
-  email String
+  email String @unique
   password String
   avatar String
+  // review Review[]
 }
 
 model List {
@@ -39,7 +40,7 @@ model Book {
   category String
   imageUrl String
   description String
-  reviews Review[]
+  // reviews Review[]
 }
 
 model BooksOnLists {
@@ -52,8 +53,10 @@ model BooksOnLists {
 
 model Review {
   id Int @id @default(autoincrement())
-  book Book @relation(fields:[bookId], references: [id])
-  bookId Int
+  // user User @relation(fields:[userEmail, userName], references: [email])
+  userName String
+  userAvatar String
+  bookId String
   rating Int
   description String
   assignedAt DateTime @default(now())
