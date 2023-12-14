@@ -34,7 +34,9 @@
     "eslint-config-next": "^13.4.12",
     "facesjs": "^3.8.2",
     "gsap": "^3.11.5",
+    "knex": "^3.1.0",
     "mysql": "^2.18.1",
+    "mysql2": "^3.6.5",
     "next": "^13.4.12",
     "next-auth": "^4.22.3",
     "nextjs-progressbar": "^0.0.16",
@@ -58,5 +60,8 @@
     "@types/react-dom": "^17.0.2",
     "dotenv-cli": "^7.2.1",
     "prisma": "^4.16.2"
+  },
+  "resolutions": {
+    "react": "18.2.0"
   }
 }
