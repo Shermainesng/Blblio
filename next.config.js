@@ -3,9 +3,9 @@
 const nextAuthUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/api/auth"
-    : "https://blblio-opls.vercel.app/api/auth";
+    : "https://blblio-opls-shermainesng.vercel.app/api/auth";
 
-console.log(process.env.NODE_ENV);
+console.log("NEXTAUTHURL", process.env.NODE_ENV);
 
 const nextConfig = {
   async redirects() {
