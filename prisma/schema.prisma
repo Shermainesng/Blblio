@@ -38,13 +38,13 @@ model Book {
   id            Int    @id @default(autoincrement())
   bookId        String
   listId        Int
-  title         String
+  title         String @db.VarChar(100)
   author        String
   publisher     String
   publishedDate String
   category      String
   imageUrl      String
-  description   String
+  description   String @db.VarChar(600)
   // reviews Review[]
 }
 
