@@ -2,7 +2,8 @@
 
 const nextAuthUrl =
   process.env.NODE_ENV === "production"
-    ? "https://blblio-xhl7.vercel.app/api/auth"
+    ? // ? "https://blblio-xhl7.vercel.app/api/auth"
+      "https://blblio-opls.vercel.app/api/auth"
     : "http://localhost:3000/api/auth";
 
 const nextConfig = {

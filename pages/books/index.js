@@ -17,7 +17,7 @@ export default function AllPublicBooks() {
     "https://www.googleapis.com/books/v1/volumes?q=most+famous+books&maxResults=10&key=AIzaSyCQucF_1d8cNR0dwoI43RpQK8E0xTCgjFs",
     fetcher
   );
-  if (error) return <div>failed to load</div>;
+  if (error) return <div>Failed to load</div>;
   // if(!data) return <div>loading</div>
   console.log(data);
 
