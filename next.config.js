@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const nextAuthUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://blblio-opls.vercel.app/api/auth"
-    : "http://localhost:3000/api/auth";
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000/api/auth"
+    : "https://blblio-opls.vercel.app/api/auth";
+
+console.log(process.env.NODE_ENV);
 
 const nextConfig = {
   async redirects() {
